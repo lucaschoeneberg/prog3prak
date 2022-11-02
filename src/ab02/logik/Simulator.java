@@ -5,79 +5,87 @@ import java.util.Random;
 
 public class Simulator implements Simulation {
 
-    private boolean[][] spielfeld;
-    private BeiAenderung beiAenderung;
-    private int anzahlFelder;
+    private boolean[][] gameField;
+
+    private BeiAenderung onSwitch;
+    private int amountFields;
 
     /**
-     * @param anzahlDerZellen
-     * @param wahrscheinlichkeitDerBesiedlung
+     * Erstellt mithilfe der anzahl der Zellen ein neues boolean[][] und gibt den einzelnen Zellen des 2-Dimensionalen
+     * Arrays mithilfe der wahrscheinlichkeit der Besiedelung einen Wert. Nachdem alles erstellt wurde wird das Feld 
+     * mithilfe der aktualisieren() methode aktualisiert.
+     *
+     * @param amountCells                 beschreibt die Anzahl der Zellen für eine Seitenlaenge des Spielfeldes
+     * @param probability beschreibt die wahrscheinlichkeit der Besiedlung für das Spielfeld
      */
     @Override
-    public void berechneAnfangsGeneration(int anzahlDerZellen, int wahrscheinlichkeitDerBesiedlung) {
-        this.anzahlFelder = anzahlDerZellen;
-        this.spielfeld = new boolean[anzahlDerZellen][anzahlDerZellen];
+    public void calculateFirstGeneration(int amountCells, int probability) {
+        this.amountFields = amountCells;
+        this.gameField = new boolean[amountCells][amountCells];
         Random random = new Random();
 
-        for (int i = 0; i < spielfeld.length; i++)
-            for (int j = 0; j < spielfeld.length; j++)
-                this.spielfeld[i][j] = random.nextInt(100) < wahrscheinlichkeitDerBesiedlung;
-
-        this.aktualisiere(this.spielfeld);
+        for (int i = 0; i < gameField.length; i++) {
+            for (int j = 0; j < gameField.length; j++) {
+                this.gameField[i][j] = random.nextInt(100) < probability;
+            }
+        }
+        this.update(this.gameField);
     }
 
     /**
-     * @param berechnungsschritte
+     * 
+     * 
+     * @param amountSteps Der nutzer gibt an wie viele Folgegenerationen berechnet werden sollen
      */
     @Override
-    public void berechneFolgeGeneration(int berechnungsschritte) {
-        if (berechnungsschritte < 1)
+    public void calculateNextGeneration(int amountSteps) {
+        if (amountSteps < 1) //
             return;
-        if (this.spielfeld == null)
+        if (this.gameField == null) // auf einem nicht existierenden spielfeld kann nicht gearbeitet werden
             throw new IllegalStateException("Initialisierung fehlgeschlagen");
 
-        boolean[][] neueGeneration = new boolean[this.anzahlFelder][this.anzahlFelder];
+        boolean[][] newGeneration = new boolean[this.amountFields][this.amountFields];
 
-        for (int i = 0; i < this.anzahlFelder; ++i)
-            for (int j = 0; j < this.anzahlFelder; ++j)
-                neueGeneration[i][j] = this.zellenBerechnung(i, j);
-
-        if (Arrays.deepEquals(neueGeneration, this.spielfeld)) {
+        for (int i = 0; i < this.amountFields; ++i) {
+            for (int j = 0; j < this.amountFields; ++j) {
+                newGeneration[i][j] = this.updateCells(i, j);
+            }
+        }
+        if (Arrays.deepEquals(newGeneration, this.gameField)) {
             System.out.println("Keine Änderung!");
             return;
         }
 
-        this.spielfeld = neueGeneration;
-        this.aktualisiere(this.spielfeld);
+        this.gameField = newGeneration;
+        this.update(this.gameField);
 
         try {
             Thread.sleep(150);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        this.berechneFolgeGeneration(berechnungsschritte - 1);
+        this.calculateNextGeneration(amountSteps - 1);
     }
 
-    private boolean zellenBerechnung(int cell, int column) {
+    private boolean updateCells(int lines, int column) {
         int neighbourCounter = 0;
 
         for (int i = -1; i <= 1; ++i) {
-            if (cell + i < 0 || cell + i >= this.anzahlFelder) // Zeile außerhalb des Spielfeldes
+            if (lines + i < 0 || lines + i >= this.amountFields) // Zeile außerhalb des Spielfeldes
                 continue;
 
             for (int j = -1; j <= 1; ++j) {
-                if (column + j < 0 || column + j >= this.anzahlFelder) // Spalte außerhalb des Spielfeldes
+                if (column + j < 0 || column + j >= this.amountFields) // Spalte außerhalb des Spielfeldes
                     continue;
 
                 if (i == 0 && j == 0) // aktuelle Zelle
                     continue;
 
-                if (this.spielfeld[cell + i][column + j])
+                if (this.gameField[lines + i][column + j])
                     neighbourCounter++;
             }
         }
-        if (this.spielfeld[cell][column])
+        if (this.gameField[lines][column])
             return neighbourCounter == 2 || neighbourCounter == 3; // Bleibt lebendig
 
         return neighbourCounter == 3; // Wird lebendig
@@ -88,11 +96,11 @@ public class Simulator implements Simulation {
      */
     @Override
     public void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung) {
-        this.beiAenderung = beiAenderung;
+        this.onSwitch = beiAenderung;
     }
 
-    private void aktualisiere(boolean[][] neu) {
-        if (this.beiAenderung != null)
-            beiAenderung.aktualisiere(neu);
+    private void update(boolean[][] neu) {
+        if (this.onSwitch != null)
+            onSwitch.aktualisiere(neu);
     }
 }

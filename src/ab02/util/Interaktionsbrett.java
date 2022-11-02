@@ -12,32 +12,14 @@
  */
 package ab02.util;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 /**
  * Klasse zur einfachen Darstellung elementarer graphischer
@@ -109,7 +91,7 @@ import javax.swing.SwingConstants;
  * <br>
  * <p>
  * Weiterhin bieten Objekte der Klasse ein einfaches
- * Stoppuhr-Objekt, das gestartet und gestoppt werden kann.
+ * Stoppuhr- Objekt, das gestartet und gestoppt werden kann.
  */
 public class Interaktionsbrett {
 
@@ -230,15 +212,6 @@ public class Interaktionsbrett {
      */
     public int leseUhr() {
         return uhrThread.leseUhr();
-    }
-
-    /**
-     * Methode zum Ablesen der aktuellen Größe des JFrames
-     *
-     * @return Dimension vom JFrame
-     */
-    public Dimension leseGröße() {
-        return rahmen.getSize();
     }
 
     /**
