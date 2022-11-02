@@ -6,7 +6,7 @@ public class SpielfeldDarstellung {
     private Interaktionsbrett ib;
 
     // bei 1440p Monitoren
-    private final int FRAME_WIDTH = 1200;
+    private final int FRAME_WIDTH = 380;
 
     // bei 1080p Monitoren
     // private final int FRAME_WIDTH = 940
