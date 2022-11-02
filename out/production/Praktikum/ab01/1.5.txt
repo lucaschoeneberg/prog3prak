@@ -1,0 +1,9 @@
+vorteile:
+Es kann vorteile haben eine innere Klasse zu implementieren wie z.B.
+Datenkapselung oder privaten Implementierung einer Schnittstelle.
+
+nachteile:
+Es ist klar, dass die inneren Klassen die Klassenstruktur komplizierter machen. Was dazu führt,
+dass ein unerfahrener Programmierer das Gesamtkonstrukt nicht versteht. Dazu nimmt die Wartbarkeit des Programms
+nimmt ab.
+Siehe: https://i.stack.imgur.com/6ZtAB.jpg
