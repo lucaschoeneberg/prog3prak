@@ -11,12 +11,11 @@ public class Simulator implements Simulation {
     private int amountFields;
 
     /**
-     * Erstellt mithilfe der anzahl der Zellen ein neues boolean[][] und gibt den einzelnen Zellen des 2-Dimensionalen
-     * Arrays mithilfe der wahrscheinlichkeit der Besiedelung einen Wert. Nachdem alles erstellt wurde wird das Feld 
-     * mithilfe der aktualisieren() methode aktualisiert.
+     * Creates a new boolean[][] Array with the help of @param amountCells. After that it iterates trough the whole 2-Dimensional
+     * Array and determines its state
      *
-     * @param amountCells                 beschreibt die Anzahl der Zellen für eine Seitenlaenge des Spielfeldes
-     * @param probability beschreibt die wahrscheinlichkeit der Besiedlung für das Spielfeld
+     * @param amountCells amount of Gridcells on each side of the Gamefield
+     * @param probability the probability for a individual cell to be alive or dead
      */
     @Override
     public void calculateFirstGeneration(int amountCells, int probability) {

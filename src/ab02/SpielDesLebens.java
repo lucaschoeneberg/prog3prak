@@ -10,5 +10,4 @@ public class SpielDesLebens {
         mainApp.startDesSpiels();
         System.exit(0);
     }
-
 }
