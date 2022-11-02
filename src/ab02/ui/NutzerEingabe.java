@@ -4,33 +4,25 @@ import ab02.util.EinUndAusgabe;
 
 public class NutzerEingabe {
     private EinUndAusgabe io;
-    private final int MINDESTZELLENANZAHL = 3;
-    private final int MAMIMALZELLENANZAHL = 75;
+    private final int MINIMUN_NUMBER_OF_GRID = 3;
+    private final int MAXIMUM_NUMBER_OF_GRID = 75;
 
-    /**
-     * @param io
-     */
     public NutzerEingabe(EinUndAusgabe io) {
-        this.io = new EinUndAusgabe();
+        this.io = io;
     }
 
-    /**
-     * @return
-     */
-    public int anzahlZellenDesSpielfeds() {
+    public int amountCellsOfPlayfield() {
         int input;
         do {
-            io.ausgeben("Anzahl der Zellen (mindestens " + MINDESTZELLENANZAHL +
-                            " | maximal " + MAMIMALZELLENANZAHL + "): ");
+            io.ausgeben("Anzahl der Zellen (mindestens " + MINIMUN_NUMBER_OF_GRID +
+                            " | maximal " + MAXIMUM_NUMBER_OF_GRID + "): ");
             input = io.leseInteger();
-        } while (input < MINDESTZELLENANZAHL || input > MAMIMALZELLENANZAHL);
+        } while (input < MINIMUN_NUMBER_OF_GRID || input > MAXIMUM_NUMBER_OF_GRID);
         return input;
     }
 
-    /**
-     * @return
-     */
-    public int wahrscheinlichkeitDerBesiedelung() {
+
+    public int probabilityCalculation() {
         int input;
         do {
             io.ausgeben("Bitte einen Gültigen Wert zwischen 1 - 100 Eingeben: ");
@@ -39,12 +31,7 @@ public class NutzerEingabe {
         return input;
     }
 
-    /**
-     * #
-     *
-     * @return
-     */
-    public int anzahlDerSimulationsschritte() {
+    public int amountGenerationSteps() {
         int input;
         do {
             io.ausgeben("Bitte einen Gültigen Wert zwischen 1 - " + Integer.MAX_VALUE + " Eingeben: ");
@@ -53,4 +40,3 @@ public class NutzerEingabe {
         return input;
     }
 }
-

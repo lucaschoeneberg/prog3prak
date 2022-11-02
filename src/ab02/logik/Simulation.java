@@ -5,5 +5,5 @@ public interface Simulation {
 
     void calculateNextGeneration(int berechnungsschritte);
 
-    void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung);
+    void signUpForUpdate(BeiAenderung beiAenderung);
 }

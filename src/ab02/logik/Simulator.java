@@ -32,16 +32,18 @@ public class Simulator implements Simulation {
     }
 
     /**
+     * Recursive method to calculate the next Generation. Creates a new Gamefield and checks all of the grids requirements
+     * to update the individual cells. If there are no new Changes the Game has created a stable pattern which ends the process
+     *
      * 
-     * 
-     * @param amountSteps Der nutzer gibt an wie viele Folgegenerationen berechnet werden sollen
+     * @param amountSteps the User decides how many new Generations will be shown
      */
     @Override
     public void calculateNextGeneration(int amountSteps) {
         if (amountSteps < 1) //
             return;
         if (this.gameField == null) // auf einem nicht existierenden spielfeld kann nicht gearbeitet werden
-            throw new IllegalStateException("Initialisierung fehlgeschlagen");
+            throw new IllegalStateException("Initialise failed");
 
         boolean[][] newGeneration = new boolean[this.amountFields][this.amountFields];
 
@@ -51,7 +53,7 @@ public class Simulator implements Simulation {
             }
         }
         if (Arrays.deepEquals(newGeneration, this.gameField)) {
-            System.out.println("Keine Änderung!");
+            System.out.println("No Change!");
             return;
         }
 
@@ -91,15 +93,15 @@ public class Simulator implements Simulation {
     }
 
     /**
-     * @param beiAenderung
+     * @param onSwitch
      */
     @Override
-    public void anmeldenFuerAktualisierungBeiAenderung(BeiAenderung beiAenderung) {
-        this.onSwitch = beiAenderung;
+    public void signUpForUpdate(BeiAenderung onSwitch) {
+        this.onSwitch = onSwitch;
     }
 
-    private void update(boolean[][] neu) {
+    private void update(boolean[][] newGeneration) {
         if (this.onSwitch != null)
-            onSwitch.aktualisiere(neu);
+            onSwitch.update(newGeneration);
     }
 }

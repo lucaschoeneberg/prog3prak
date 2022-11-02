@@ -23,17 +23,17 @@ public class Steuerung implements BeiAenderung {
     private void initialisierung() {
         this.spielfeldDarstellung = new SpielfeldDarstellung(new Interaktionsbrett());
         this.io = new NutzerEingabe(new EinUndAusgabe());
-        this.simulation.anmeldenFuerAktualisierungBeiAenderung(this);
+        this.simulation.signUpForUpdate(this);
     }
 
     public void startDesSpiels() {
-        int anzahlZellen = this.io.anzahlZellenDesSpielfeds();
-        int wahrscheinlichkeit = this.io.wahrscheinlichkeitDerBesiedelung();
+        int anzahlZellen = this.io.amountCellsOfPlayfield();
+        int wahrscheinlichkeit = this.io.probabilityCalculation();
         this.simulation.calculateFirstGeneration(anzahlZellen, wahrscheinlichkeit);
 
         int anzahlSchritte;
         do {
-            anzahlSchritte = this.io.anzahlDerSimulationsschritte();
+            anzahlSchritte = this.io.amountGenerationSteps();
             if (anzahlSchritte < 0)
                 break;
 
@@ -48,7 +48,7 @@ public class Steuerung implements BeiAenderung {
      * @param neueGeneration
      */
     @Override
-    public void aktualisiere(boolean[][] neueGeneration) {
+    public void update(boolean[][] neueGeneration) {
         this.spielfeldDarstellung.spielfeldDarstellen(neueGeneration);
     }
 }
