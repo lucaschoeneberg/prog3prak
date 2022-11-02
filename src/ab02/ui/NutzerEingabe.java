@@ -5,6 +5,7 @@ import ab02.util.EinUndAusgabe;
 public class NutzerEingabe {
     private EinUndAusgabe io;
     private final int MINDESTZELLENANZAHL = 3;
+    private final int MAMIMALZELLENANZAHL = 75;
 
     /**
      * @param io
@@ -19,9 +20,10 @@ public class NutzerEingabe {
     public int anzahlZellenDesSpielfeds() {
         int input;
         do {
-            io.ausgeben("Anzahl der Zellen (mindestens " + MINDESTZELLENANZAHL + "): ");
+            io.ausgeben("Anzahl der Zellen (mindestens " + MINDESTZELLENANZAHL +
+                            " | maximal " + MAMIMALZELLENANZAHL + "): ");
             input = io.leseInteger();
-        } while (input < MINDESTZELLENANZAHL);
+        } while (input < MINDESTZELLENANZAHL || input > MAMIMALZELLENANZAHL);
         return input;
     }
 
