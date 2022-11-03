@@ -6,7 +6,7 @@ public class SpielfeldDarstellung {
     private Interaktionsbrett ib;
 
     // bei 1440p Monitoren
-    private final int FRAME_WIDTH = 380;
+    private final int FRAME_WIDTH = 340;
 
     // bei 1080p Monitoren
     // private final int FRAME_WIDTH = 940
@@ -20,24 +20,24 @@ public class SpielfeldDarstellung {
     }
 
     /**
-     * @param spielfeld
+     * @param field
      */
-    public void spielfeldDarstellen(boolean[][] spielfeld) {
-        this.abwischen();
-        int seitenlaenge = this.FRAME_WIDTH / spielfeld.length;
-        for (int i = 0; i < spielfeld.length; ++i) {
-            for (int j = 0; j < spielfeld.length; ++j) {
-                Quadrat zelle = new Quadrat(this.margin + j* seitenlaenge, this.margin + i * seitenlaenge, seitenlaenge);
-                if(spielfeld[i][j])
-                    zelle.darstellenFuellung(this.ib);
+    public void drawPlayfield(boolean[][] field) {
+        this.clear();
+        int lengthOfEachEntity = this.FRAME_WIDTH / field.length;
+        for (int i = 0; i < field.length; ++i) {
+            for (int j = 0; j < field.length; ++j) {
+                Quadrat cube = new Quadrat(this.margin + j * lengthOfEachEntity, this.margin + i * lengthOfEachEntity, lengthOfEachEntity);
+                if (field[i][j])
+                    cube.drawFilling(this.ib);
                 else
-                    zelle.darstellenRahmen(this.ib);
+                    cube.drawFrame(this.ib);
             }
         }
     }
 
 
-    public void abwischen() {
+    public void clear() {
         ib.abwischen();
     }
 

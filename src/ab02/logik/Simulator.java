@@ -68,6 +68,12 @@ public class Simulator implements Simulation {
         this.calculateNextGeneration(amountSteps - 1);
     }
 
+    /**
+     *
+     * @param lines
+     * @param column
+     * @return
+     */
     private boolean updateCells(int lines, int column) {
         int neighbourCounter = 0;
 

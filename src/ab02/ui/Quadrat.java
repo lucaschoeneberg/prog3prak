@@ -6,12 +6,12 @@ public class Quadrat {
 
     private int x;
     private int y;
-    private int seitenlaenge;
+    private int length;
 
-    public Quadrat(int x, int y, int laenge) {
+    public Quadrat(int x, int y, int length) {
         setX(x);
         setY(y);
-        setSeitenlaenge(laenge);
+        setLength(length);
     }
 
     public void setX(int x) {
@@ -30,26 +30,26 @@ public class Quadrat {
         this.y = y;
     }
 
-    public void setSeitenlaenge(int seitenlaenge) {
-        this.seitenlaenge = seitenlaenge;
+    public void setLength(int length) {
+        this.length = length;
     }
 
 
     /**
      * @param ib
      */
-    public void darstellenRahmen(Interaktionsbrett ib) {
-        ib.neuesRechteck(this.x, this.y, this.seitenlaenge, this.seitenlaenge);
+    public void drawFrame(Interaktionsbrett ib) {
+        ib.neuesRechteck(this.x, this.y, this.length, this.length);
     }
 
     /**
      * @param ib
      */
-    public void darstellenFuellung(Interaktionsbrett ib) {
-        this.darstellenRahmen(ib);
-        int i = 2;
-        while (i < this.seitenlaenge -1){
-            ib.neueLinie(this.x + i, this.y + 2, this.x + i, this.y + this.seitenlaenge - 2);
+    public void drawFilling(Interaktionsbrett ib) {
+        this.drawFrame(ib);
+        int i = 0;
+        while (i < this.length){
+            ib.neueLinie(this.x + i, this.y, this.x + i, this.y + this.length);
             i++;
         }
     }
