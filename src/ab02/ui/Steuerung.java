@@ -4,7 +4,6 @@ import ab02.logik.BeiAenderung;
 import ab02.logik.Simulation;
 import ab02.util.EinUndAusgabe;
 import ab02.util.Interaktionsbrett;
-
 import java.util.Objects;
 
 public class Steuerung implements BeiAenderung {
@@ -17,9 +16,6 @@ public class Steuerung implements BeiAenderung {
         this.initialise();
     }
 
-    /**
-     *
-     */
     private void initialise() {
         this.gameDisplayer = new SpielfeldDarstellung(new Interaktionsbrett());
         this.io = new NutzerEingabe(new EinUndAusgabe());
@@ -40,12 +36,8 @@ public class Steuerung implements BeiAenderung {
             this.simulation.calculateNextGeneration(amountSteps);
         } while (amountSteps >= 0);
         System.out.println("-------------------------------------------------------------" + "\n" + "Und Tschuess!!!");
-
     }
 
-    /**
-     * @param newGeneration
-     */
     @Override
     public void update(boolean[][] newGeneration) {
         this.gameDisplayer.drawPlayfield(newGeneration);

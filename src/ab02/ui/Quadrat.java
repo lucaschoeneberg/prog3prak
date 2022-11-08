@@ -20,10 +20,6 @@ public class Quadrat {
         this.x = x;
     }
 
-    public int getY() {
-        return y;
-    }
-
     public void setY(int y) {
         if (y < 0)
             throw new IllegalArgumentException("Y-Position muss negativ sein");
@@ -34,17 +30,10 @@ public class Quadrat {
         this.length = length;
     }
 
-
-    /**
-     * @param ib
-     */
     public void drawFrame(Interaktionsbrett ib) {
         ib.neuesRechteck(this.x, this.y, this.length, this.length);
     }
 
-    /**
-     * @param ib
-     */
     public void drawFilling(Interaktionsbrett ib) {
         this.drawFrame(ib);
         int i = 0;

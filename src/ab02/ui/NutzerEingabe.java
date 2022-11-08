@@ -21,7 +21,6 @@ public class NutzerEingabe {
         return input;
     }
 
-
     public int probabilityCalculation() {
         int input;
         do {

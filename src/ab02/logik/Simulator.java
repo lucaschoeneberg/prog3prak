@@ -98,9 +98,6 @@ public class Simulator implements Simulation {
         return neighbourCounter == 3; // Wird lebendig
     }
 
-    /**
-     * @param onSwitch
-     */
     @Override
     public void signUpForUpdate(BeiAenderung onSwitch) {
         this.onSwitch = onSwitch;
