@@ -35,11 +35,8 @@ public class Quadrat {
     }
 
     public void drawFilling(Interaktionsbrett ib) {
-        this.drawFrame(ib);
-        int i = 0;
-        while (i < this.length){
+        for (int i = 0; i  < this.length; i++){
             ib.neueLinie(this.x + i, this.y, this.x + i, this.y + this.length);
-            i++;
         }
     }
 }
