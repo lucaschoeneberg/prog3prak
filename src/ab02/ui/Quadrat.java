@@ -9,24 +9,24 @@ public class Quadrat {
     private int length;
 
     public Quadrat(int x, int y, int length) {
-        setX(x);
-        setY(y);
-        setLength(length);
+        this.setX(x);
+        this.setY(y);
+        this.setLength(length);
     }
 
-    public void setX(int x) {
+    private void setX(int x) {
         if (x < 0)
             throw new IllegalArgumentException("X-Position muss positiv sein");
         this.x = x;
     }
 
-    public void setY(int y) {
+    private void setY(int y) {
         if (y < 0)
             throw new IllegalArgumentException("Y-Position muss negativ sein");
         this.y = y;
     }
 
-    public void setLength(int length) {
+    private void setLength(int length) {
         this.length = length;
     }
 
