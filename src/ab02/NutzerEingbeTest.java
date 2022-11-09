@@ -4,6 +4,7 @@ import ab02.ui.NutzerEingabe;
 import ab02.util.EinUndAusgabe;
 
 public class NutzerEingbeTest {
+
     public static void main(String[] args) {
         NutzerEingabe io = new NutzerEingabe(new EinUndAusgabe());
 
