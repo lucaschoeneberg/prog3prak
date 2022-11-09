@@ -35,7 +35,6 @@ public class Simulator implements Simulation {
      * Recursive method to calculate the next Generation. Creates a new Gamefield and checks all of the grids requirements
      * to update the individual cells. If there are no new Changes the Game has created a stable pattern which ends the process
      *
-     * 
      * @param amountSteps the User decides how many new Generations will be shown
      */
     @Override
@@ -68,12 +67,6 @@ public class Simulator implements Simulation {
         this.calculateNextGeneration(amountSteps - 1);
     }
 
-    /**
-     *
-     * @param lines
-     * @param column
-     * @return
-     */
     private boolean updateCells(int lines, int column) {
         int neighbourCounter = 0;
 

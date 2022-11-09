@@ -12,7 +12,7 @@ public class QuadratTest {
     @BeforeEach
     void setUp() {
         ib = new Interaktionsbrett();
-        cube = new Quadrat(1, 1, 40);
+        cube = new Quadrat(1, 1, 200);
     }
 
     @Test
@@ -22,8 +22,9 @@ public class QuadratTest {
     }
 
     @Test
-    void drawFilling() {
+    void drawFilling() throws InterruptedException {
         System.out.println("Test: draw Filed Frame of Quadrat.");
         cube.drawFilling(ib);
+        Thread.sleep(900);
     }
 }
