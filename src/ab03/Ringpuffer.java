@@ -2,11 +2,19 @@ package ab03;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Queue;
 
 public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
+    private ArrayList<T> elements = new ArrayList<>();
+    private int writePos;
+    private int readPos;
+    private int size;
+    private int capacity;
+    private boolean fixedCapacity;
+    private boolean discarding;
 
     @Override
     public int size() {
