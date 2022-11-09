@@ -2,10 +2,7 @@ package ab03;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
+import java.util.*;
 
 public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
     private ArrayList<T> elements = new ArrayList<>();
@@ -18,67 +15,67 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
 
     @Override
     public int size() {
-        return 0;
+        return elements.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return elements.isEmpty();
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        return elements.contains(o);
     }
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return elements.iterator();
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return elements.toArray();
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        return elements.toArray(a);
     }
 
     @Override
     public boolean add(T t) {
-        return false;
+        return elements.add(t);
     }
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        return elements.remove(o);
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        return elements.containsAll(c);
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        return elements.addAll(c);
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        return elements.removeAll(c);
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        return elements.retainAll(c);
     }
 
     @Override
     public void clear() {
-
+        elements.clear();
     }
 
     @Override
