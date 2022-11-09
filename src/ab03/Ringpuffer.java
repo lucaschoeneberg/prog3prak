@@ -6,12 +6,16 @@ import java.util.*;
 
 public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
     private ArrayList<T> elements = new ArrayList<>();
-    private int writePos;
-    private int readPos;
+    private int writePos = 0;
+    private int readPos = 0;
     private int size;
     private int capacity;
     private boolean fixedCapacity;
     private boolean discarding;
+
+    public Ringpuffer(){
+
+    }
 
     @Override
     public int size() {
@@ -45,7 +49,9 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
 
     @Override
     public boolean add(T t) {
-        return elements.add(t);
+        elements.add(writePos, t);
+        writePosUp();
+        return true;
     }
 
     @Override
@@ -80,26 +86,63 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
 
     @Override
     public boolean offer(T t) {
-        return false;
+        if(!isEmpty() && t.getClass().equals(elements.get(0).getClass()))
+            throw new ClassCastException();
+
+        if (t.equals(null))
+            throw new NullPointerException();
+
+       this.add(t);
+       return true;
     }
 
     @Override
     public T remove() {
-        return null;
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        T tmp = elements.get(this.readPos);
+        readPosUp();
+        return tmp;
     }
 
     @Override
     public T poll() {
-        return null;
+        if (isEmpty()) {
+            return null;
+        }
+        T tmp = elements.get(this.readPos);
+        readPosUp();
+        return tmp;
     }
 
     @Override
     public T element() {
-        return null;
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return elements.get(this.readPos);
     }
 
     @Override
     public T peek() {
-        return null;
+        if (isEmpty()) {
+            return null;
+        }
+        return elements.get(this.readPos);
+    }
+
+    private void readPosUp() {
+        if(this.readPos < this.capacity)
+            this.readPos++;
+        else
+            this.readPos = 0;
+    }
+
+    private void writePosUp() {
+        if(this.writePos < this.capacity)
+            this.writePos++;
+        else
+            this.writePos = 0;
     }
 }
