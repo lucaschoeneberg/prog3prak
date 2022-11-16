@@ -3,14 +3,14 @@ package ab03;
 public class Main {
 
     public static void main(String[] args) {
-        trueTure();
+        trueTrue();
         falseFalse();
     }
 
-    public static void trueTure() {
-        Ringpuffer<Integer> Buffer = new Ringpuffer<>(4, true, true);
-        Ringpuffer<Integer> Buffer2 = new Ringpuffer<>(4, true, true);
-        test(Buffer, Buffer2);
+    public static void trueTrue() {
+        Ringpuffer<Integer> BeispielTrueTrue = new Ringpuffer<>(4, true, true);
+        Ringpuffer<Integer> BeispielFalseFalse = new Ringpuffer<>(4, true, true);
+        test(BeispielTrueTrue, BeispielFalseFalse);
     }
 
     public static void falseFalse() {
@@ -24,31 +24,43 @@ public class Main {
         for (int i = 0; i < 10; i++) {
             try {
                 Buffer.add(count++);
+                Buffer2.add(count);
             } catch (IllegalStateException e) {
                 System.out.println(e);
             }
         }
-        count = 0;
-        for (int i = 10; i < 20; i++) {
+      // Warum????  count = 0;
+
+   /** Warum???    for (int i = 10; i < 20; i++) {
             try {
                 Buffer2.add(count++);
             } catch (IllegalStateException e) {
                 System.out.println(e);
             }
-        }
+        }*/
 
-        System.out.println("Iterator Buffer print:");
-        Buffer.forEach(System.out::println);
+        System.out.print("\nIterator Buffer print: ");
+        Buffer.forEach(System.out::print);
+        System.out.print("\nIterator Buffer2 print: ");
+        Buffer2.forEach(System.out::print);
+        System.out.println("\n\n------------------------------------------------\n" );
 
-        System.out.println("addAll to Buffer2");
+        System.out.println("Test: addAll from Buffer to Buffer2");
         Buffer2.addAll(Buffer);
-        System.out.println("Buffer2 containsAll from Buffer: " + Buffer2.containsAll(Buffer));
-        System.out.println("Iterator Buffer2 print:");
-        Buffer2.forEach(System.out::println);
+        System.out.print("Buffer: ");
+        Buffer.forEach(System.out::print);
+        System.out.print("\nBuffer2: ");
+        Buffer2.forEach(System.out::print);
+        System.out.println("\nBuffer2 containsAll from Buffer: " + Buffer2.containsAll(Buffer));
+        System.out.println("\n------------------------------------------------\n" );
+
+        System.out.println("Test: Remove");
         Buffer2.remove();
-        System.out.println("Remove");
-        System.out.println("Iterator Buffer2 print:");
-        Buffer2.forEach(System.out::println);
+        System.out.print("Buffer2: ");
+        //Buffer2.forEach(System.out::print);
+        System.out.println(Buffer2);
+        System.out.println("\n------------------------------------------------\n" );
+
         System.out.println("Does Buffer2 contain 3: " + Buffer2.contains(3));
         System.out.println("Does Buffer2 contain 0: " + Buffer2.contains(0));
         System.out.println("Does Buffer contain 3: " + Buffer.contains(3));

@@ -22,6 +22,8 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
         this.elements = new ArrayList<>(capacity);
     }
 
+
+
     @Override
     public int size() {
         return elements.size();
@@ -34,7 +36,7 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
 
     @Override
     public boolean contains(Object o) {
-        return elements.stream().noneMatch(element -> (element == o));
+        return elements.stream().anyMatch(element -> (element == o));
     }
 
     @Override
