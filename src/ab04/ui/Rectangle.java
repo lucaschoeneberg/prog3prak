@@ -37,59 +37,62 @@ public class Rectangle {
     }
 
     public void drawFrame(Interaktionsbrett ib) {
-        ib.neuesRechteck(this.x, this.y, this.width, this.width);
+        ib.neuesRechteck(this.x, this.y, this.width, this.height);
     }
 
     public void drawFilling(Interaktionsbrett ib) {
         for (int i = 0; i < this.width; i++) {
-            ib.neueLinie(this.x + i, this.y, this.x + i, this.y + this.width);
+            ib.neueLinie(this.x + i, this.y, this.x + i, this.y + this.height);
         }
     }
 
-    // TODO: 16.11.2022
     public int up() {
-        return 0;
+        return this.y;
     }
 
-    // TODO: 16.11.2022
     public int down() {
-        return 0;
-    }// TODO: 16.11.2022
+        return this.y + this.height;
+    }
 
     public int left() {
-        return 0;
-    }// TODO: 16.11.2022
+        return this.x;
+    }
 
     public int right() {
-        return 0;
-    }// TODO: 16.11.2022
+        return this.x + this.width;
+    }
 
     public int width() {
-        return 0;
-    }// TODO: 16.11.2022
+        return this.width;
+    }
 
     public int height() {
-        return 0;
-    }// TODO: 16.11.2022
+        return this.height;
+    }
 
     public int midY() {
-        return 0;
-    }// TODO: 16.11.2022
+        return this.y + this.height / 2;
+    }
 
     public int midX() {
-        return 0;
-    }// TODO: 16.11.2022
+        return this.x + this.width / 2;
+    }
 
     public void move(int dx, int dy) {
-
-    }// TODO: 16.11.2022
+        this.x += dx;
+        this.y += dy;
+    }
 
     public void moveTo(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
-    }// TODO: 16.11.2022
-
-    public boolean crosses() {
+    public boolean crosses(Rectangle other) {
+        if (this.up() < other.down() || this.down() > other.up()) return false;
+        if (this.right() < other.left() || this.left() > other.right()) return false;
         return true;
     }
+
 
 }
