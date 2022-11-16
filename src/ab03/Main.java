@@ -29,48 +29,72 @@ public class Main {
                 System.out.println(e);
             }
         }
-      // Warum????  count = 0;
+        // Warum????  count = 0;
 
-   /** Warum???    for (int i = 10; i < 20; i++) {
-            try {
-                Buffer2.add(count++);
-            } catch (IllegalStateException e) {
-                System.out.println(e);
-            }
-        }*/
+        /** Warum???    for (int i = 10; i < 20; i++) {
+         try {
+         Buffer2.add(count++);
+         } catch (IllegalStateException e) {
+         System.out.println(e);
+         }
+         }*/
 
+        System.out.println("Test: Iterate with iterator over Queue");
         System.out.print("\nIterator Buffer print: ");
         Buffer.forEach(System.out::print);
         System.out.print("\nIterator Buffer2 print: ");
         Buffer2.forEach(System.out::print);
-        System.out.println("\n\n------------------------------------------------\n" );
+        System.out.println("\n\n----------------------------------------------------------------------------------\n");
 
         System.out.println("Test: addAll from Buffer to Buffer2");
         Buffer2.addAll(Buffer);
-        System.out.print("Buffer: ");
-        Buffer.forEach(System.out::print);
-        System.out.print("\nBuffer2: ");
-        Buffer2.forEach(System.out::print);
+        System.out.println("Buffer1: " + Buffer);
+      //  Buffer.forEach(System.out::print);
+        System.out.println("Buffer2: " + Buffer2);
+       // Buffer2.forEach(System.out::print);
         System.out.println("\nBuffer2 containsAll from Buffer: " + Buffer2.containsAll(Buffer));
-        System.out.println("\n------------------------------------------------\n" );
+        System.out.println("\n----------------------------------------------------------------------------------\n");
 
         System.out.println("Test: Remove");
         Buffer2.remove();
-        System.out.print("Buffer2: ");
+     //   System.out.print("Buffer2: ");
         //Buffer2.forEach(System.out::print);
-        System.out.println(Buffer2);
-        System.out.println("\n------------------------------------------------\n" );
+        System.out.println("Buffer2: " + Buffer2);
+        System.out.println("\n----------------------------------------------------------------------------------\n");
 
-        System.out.println("Does Buffer2 contain 3: " + Buffer2.contains(3));
-        System.out.println("Does Buffer2 contain 0: " + Buffer2.contains(0));
+
+        System.out.println("Test: contain");
+        System.out.println("Does Buffer2 contain 8: " + Buffer2.contains(8));
+        System.out.println("Does Buffer2 contain 6: " + Buffer2.contains(6));
         System.out.println("Does Buffer contain 3: " + Buffer.contains(3));
         System.out.println("Does Buffer contain 0: " + Buffer.contains(0));
-        System.out.println("Offer 2");
-        Buffer2.offer(2);
-        System.out.println("Iterator Buffer2 print:");
-        Buffer2.forEach(System.out::println);
+        System.out.println("\n----------------------------------------------------------------------------------\n");
 
+        System.out.println("Test: offer");
+        System.out.println("Offer 2 to Buffer2");
+        try {
+            Buffer2.offer(2);
+        } catch (NullPointerException e) {
+            System.out.println("Nullpointerexception wird geworfen: Null wird aufgefangen");
+        }
+        System.out.println("Buffer2: " + Buffer2);
+        //  Buffer2.forEach(System.out::print);
+
+        System.out.println("Test: try to offer null");
+        try {
+            Buffer2.offer(null);
+        } catch (NullPointerException e) {
+            System.out.println("Nullpointerexception wird geworfen: Null wird aufgefangen");
+        }
+        System.out.print("Buffer2: " + Buffer2);
+        //  Buffer2.forEach(System.out::print);
+        System.out.println("\n\n----------------------------------------------------------------------------------\n");
+
+        System.out.println("Test: peek on Buffer2");
+        System.out.println("\npeek: " + Buffer2.peek());
         System.out.println("peek: " + Buffer2.peek());
+        System.out.println("\n----------------------------------------------------------------------------------\n");
+
     }
 }
 
