@@ -16,6 +16,22 @@ public class Rectangle {
         this.setHeight(height);
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     private void setX(int x) {
         if (x < 0)
             throw new IllegalArgumentException("X-Position muss positiv sein");
@@ -71,7 +87,7 @@ public class Rectangle {
     }
 
     public int midY() {
-        return this.y + this.height / 2;
+        return this.y;
     }
 
     public int midX() {

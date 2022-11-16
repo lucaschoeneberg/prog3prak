@@ -1,6 +1,6 @@
 package ab04.ui;
 
-public class Player {
+public class Player implements Movable {
     private Gamefield gamefield;
     private Rectangle bat;
     private int score;
@@ -10,21 +10,24 @@ public class Player {
 
     }
 
-    // TODO: 16.11.2022
-    public void moveUP(){
-
+    @Override
+    public void move(int dx, int dy) {
+        this.bat.move(dx, dy);
     }
 
-    // TODO: 16.11.2022
-    public void moveDown(){
-
+    public void moveUP() {
+        this.move(1, 1);
     }
 
-    public void resetScore(){
+    public void moveDown() {
+        this.move(-1, -1);
+    }
+
+    public void resetScore() {
         this.score = 0;
     }
 
-    public void score(){
+    public void score() {
         this.score++;
     }
 }
