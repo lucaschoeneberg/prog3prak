@@ -2,17 +2,21 @@ package ab04.ui;
 
 public class Player implements Movable {
     private Gamefield gamefield;
-    private Rectangle bat;
+    private Rectangle paddle;
     private int score;
 
-    // TODO: 16.11.2022
-    public Player(Gamefield gamefield, int batX, int batY) {
+    public Player(Gamefield gamefield, int paddleX, int paddleY) {
+        this.gamefield = gamefield;
+        this.paddle = new Rectangle(paddleX, paddleY, gamefield.getDIM().width / 100, gamefield.getDIM().height / 10);
+    }
 
+    public Rectangle getPaddle() {
+        return paddle;
     }
 
     @Override
     public void move(int dx, int dy) {
-        this.bat.move(dx, dy);
+        this.paddle.move(dx, dy);
     }
 
     public void moveUP() {
