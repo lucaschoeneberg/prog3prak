@@ -13,7 +13,7 @@ public class Gamefield {
     private Rectangle field;
 
     public Gamefield() {
-        this.field = new Rectangle(MARGIN, MARGIN, IB_DIM.width - MARGIN * 4, IB_DIM.height - MARGIN * 8);
+        this.field = new Rectangle(MARGIN, MARGIN, FIELD_DIM.width, FIELD_DIM.height);
         this.leftX = MARGIN;
         this.topY = MARGIN;
         this.rightX = MARGIN + IB_DIM.width - MARGIN * 4;

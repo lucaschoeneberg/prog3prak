@@ -1,6 +1,6 @@
 package ab04.ui;
 
-import ab02.util.Interaktionsbrett;
+import ab04.util.Interaktionsbrett;
 
 public class Rectangle {
 

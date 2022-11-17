@@ -9,5 +9,6 @@ public class Pong {
     public static void main(String[] args) {
         Controller controller = new Controller();
         controller.initialisePositions();
+        controller.gameLoop();
     }
 }

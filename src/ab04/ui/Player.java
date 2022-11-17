@@ -19,12 +19,14 @@ public class Player implements Movable {
         this.paddle.move(dx, dy);
     }
 
-    public void moveUP() {
-        this.move(1, 1);
+    public void moveUp() {
+        if (this.paddle.getY() > this.gamefield.getTopY())
+            this.move(-1, -1);
     }
 
     public void moveDown() {
-        this.move(-1, -1);
+        if (this.paddle.getY()+this.paddle.getHeight() < this.gamefield.getBottomY())
+        this.move(1, 1);
     }
 
     public void resetScore() {
@@ -33,5 +35,9 @@ public class Player implements Movable {
 
     public void score() {
         this.score++;
+    }
+
+    public int getScore(){
+        return this.score;
     }
 }

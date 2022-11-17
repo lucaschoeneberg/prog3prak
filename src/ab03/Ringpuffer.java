@@ -22,8 +22,6 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
         this.elements = new ArrayList<>(capacity);
     }
 
-
-
     @Override
     public int size() {
         return elements.size();
@@ -181,6 +179,7 @@ public class Ringpuffer<T> implements Queue<T>, Serializable, Cloneable {
     private void readPosUp() {
         this.readPos = (readPos + 1) % capacity;
     }
+
 
     private void writePosUp() {
         this.writePos = (writePos + 1) % capacity;
