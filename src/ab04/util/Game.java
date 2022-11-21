@@ -24,7 +24,6 @@ public class Game implements Update {
         this.field = new Gamefield();
         ib.willTasteninfo(this);
         this.field.setUpdate(this);
-
     }
 
     // TODO: 16.11.2022
@@ -52,6 +51,9 @@ public class Game implements Update {
         this.playerLeft.getPaddle().drawFilling(this.ib);
         this.playerRight.getPaddle().drawFilling(this.ib);
         // Ball position must be set
+        this.ball = new Ball();
+        this.ball.draw(this.ib);
+
     }
 
     public void tasteGedrueckt(String s) throws InterruptedException {
