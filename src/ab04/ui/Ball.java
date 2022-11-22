@@ -35,9 +35,9 @@ public class Ball implements Movable {
     }
 
     public void makeBallMoveSlower() {
-        if (this.speedX > MIN_SPEED && this.speedX > 0)
+        if (this.speedX > MIN_SPEED)
             this.speedX--;
-        else if (this.speedX < -MIN_SPEED && this.speedX < 0)
+        else if (this.speedX < -MIN_SPEED)
             this.speedX++;
     }
 

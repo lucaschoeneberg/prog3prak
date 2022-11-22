@@ -15,6 +15,7 @@ public class Game {
     private Player playerLeft, playerRight;
     private Ball ball;
     private Interaktionsbrett ib;
+    private boolean scored = false;
 
     public Game() {
         this.ib = new Interaktionsbrett();
@@ -48,16 +49,24 @@ public class Game {
         this.detection.checkCollisionWithPaddle(this.ball);
         if (ball.getPosition() == BallPosition.OUTSIDE_LEFT) {
             playerRight.score();
+            this.scored = true;
             ball.setRandomStartingPointRightSide();
+
         }
         if (ball.getPosition() == BallPosition.OUTSIDE_RIGHT) {
             playerLeft.score();
+            this.scored = true;
             ball.setRandomStartingPointLeftSide();
         }
     }
 
     private void moveBall() {
-        this.ball.move(this.ball.getSpeedX(), this.ball.getSpeedY());
+        int randomizeBallMovement = (int) (Math.random() * 10);
+        if (randomizeBallMovement > 5) {
+            this.ball.move(this.ball.getSpeedX(), this.ball.getSpeedY());
+        } else {
+            this.ball.move(this.ball.getSpeedX(), this.ball.getSpeedY() * -1);
+        }
     }
 
     private void updateScreen() {
@@ -83,11 +92,19 @@ public class Game {
     public void gameLoop() {
         long difference;
         while (!won) {
-            long before = System.currentTimeMillis();
             ib.abwischen();
             checkCollision();
             moveBall();
             updateScreen();
+            if (scored) {
+                try {
+                    Thread.sleep(500);
+                    scored = false;
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            long before = System.currentTimeMillis();
             checkIfWon();
             long after = System.currentTimeMillis();
             difference = after - before;
