@@ -33,23 +33,37 @@ public class Game {
     }
 
     public void gameLoop() {
-        new Thread(() -> {
-            long difference;
-            while (!won) {
-                long before = System.currentTimeMillis();
-                ib.abwischen();
-                checkCollision();
-                moveBall();
-                update();
-                long after = System.currentTimeMillis();
-                difference = after - before;
-                try {
-                    Thread.sleep(FPMS - difference);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+
+        long difference;
+        while (!won) {
+            long before = System.currentTimeMillis();
+            ib.abwischen();
+            checkCollision();
+            moveBall();
+            update();
+            checkIfWon();
+            long after = System.currentTimeMillis();
+            difference = after - before;
+            try {
+                Thread.sleep(FPMS - difference);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-        }).start();
+        }
+        drawWinningMessage();
+
+    }
+
+    private void drawWinningMessage() {
+        this.ib.neuerText(this.field.getDIM().width / 4 + 50, this.field.getDIM().height / 2, "Spieler " + (this.playerLeft.getScore() == MAX_SCORE ? "links" : "rechts") + " hat gewonnen!\n Drücke S zum Neustart");
+
+    }
+
+    private void checkIfWon() {
+        if (this.playerLeft.getScore() == MAX_SCORE || this.playerRight.getScore() == MAX_SCORE) {
+            this.won = true;
+            this.running = false;
+        }
     }
 
     private void moveBall() {
@@ -78,6 +92,9 @@ public class Game {
     }
 
     public void initialisePositions() {
+        this.playerLeft.getPaddle().moveTo(this.playerLeft.getPaddle().getX(), this.field.getDIM().height / 2 - this.playerLeft.getPaddle().getHeight() / 2);
+        this.playerRight.getPaddle().moveTo(this.playerRight.getPaddle().getX(), this.field.getDIM().height / 2 - this.playerRight.getPaddle().getHeight() / 2);
+        ;
         this.field.draw(this.ib);
         this.playerLeft.draw(this.ib);
         this.playerRight.draw(this.ib);
@@ -94,9 +111,14 @@ public class Game {
     public void tasteGedrueckt(String s) throws InterruptedException {
 
         if (!running && s.equals("s")) {
+            this.won = false;
             running = true;
             System.out.println("Game started");
-            gameLoop();
+            new Thread(() -> {
+                this.playerLeft.resetScore();
+                this.playerRight.resetScore();
+                gameLoop();
+            }).start();
         }
         if (running) {
             switch (s) {
