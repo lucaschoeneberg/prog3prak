@@ -9,13 +9,12 @@ import ab04.ui.Player;
 public class Game {
 
     private final int MAX_SCORE = 5, MARGIN_PADDLE = 10, FPMS = 17;
-    private boolean won = false, running = false;
+    private boolean won = false, running = false, scored = false;
     private CollisionDetection detection;
     private Gamefield field;
     private Player playerLeft, playerRight;
     private Ball ball;
     private Interaktionsbrett ib;
-    private boolean scored = false;
 
     public Game() {
         this.ib = new Interaktionsbrett();
