@@ -3,10 +3,9 @@ package ab04.ui;
 import ab04.util.Interaktionsbrett;
 
 public class Player implements Movable {
-    private int MOVEMENT_SPEED;
+    private int MOVEMENT_SPEED, score;
     private Gamefield gamefield;
     private Rectangle paddle;
-    private int score;
 
     public Player(Gamefield gamefield, int paddleX, int paddleY) {
         this.gamefield = gamefield;
@@ -21,6 +20,11 @@ public class Player implements Movable {
     @Override
     public void move(int dx, int dy) {
         this.paddle.move(dx, dy);
+    }
+
+    @Override
+    public void moveTo(int x, int y) {
+        this.paddle.moveTo(x, y);
     }
 
     public void moveUp() {

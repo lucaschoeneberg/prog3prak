@@ -1,7 +1,6 @@
 package ab04.ui;
 
 import ab04.util.Interaktionsbrett;
-
 import java.awt.*;
 
 public class Gamefield {
@@ -29,10 +28,6 @@ public class Gamefield {
         return FIELD_DIM;
     }
 
-    public int getMARGIN() {
-        return MARGIN;
-    }
-
     public int getLeftX() {
         return leftX;
     }
@@ -47,9 +42,5 @@ public class Gamefield {
 
     public int getBottomY() {
         return bottomY;
-    }
-
-    public Rectangle getField() {
-        return this.field;
     }
 }

@@ -2,12 +2,9 @@ package ab04.ui;
 
 import ab04.util.Interaktionsbrett;
 
-public class Rectangle {
+public class Rectangle implements Movable {
 
-    private int x;
-    private int y;
-    private int width;
-    private int height;
+    private int x, y, width, height;
 
     public Rectangle(int x, int y, int width, int height) {
         this.setX(x);
@@ -52,10 +49,6 @@ public class Rectangle {
         this.height = height;
     }
 
-    public void drawFrame(Interaktionsbrett ib) {
-        ib.neuesRechteck(this.x, this.y, this.width, this.height);
-    }
-
     public void drawFilling(Interaktionsbrett ib) {
         for (int i = 0; i < this.width; i++) {
             ib.neueLinie(this.x + i, this.y, this.x + i, this.y + this.height);
@@ -70,22 +63,6 @@ public class Rectangle {
         return this.y + this.height;
     }
 
-    public int left() {
-        return this.x;
-    }
-
-    public int right() {
-        return this.x + this.width;
-    }
-
-    public int width() {
-        return this.width;
-    }
-
-    public int height() {
-        return this.height;
-    }
-
     public int midY() {
         return this.y;
     }
@@ -94,18 +71,20 @@ public class Rectangle {
         return this.x + this.width / 2;
     }
 
+    @Override
     public void move(int dx, int dy) {
         this.x += dx;
         this.y += dy;
     }
 
+    @Override
     public void moveTo(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     /**
-     * src: java.awt.Rectangle
+     * source: java.awt.Rectangle
      */
     public boolean crosses(Rectangle other) {
         int tw = this.width;

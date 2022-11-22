@@ -15,12 +15,12 @@ public class CollisionDetection {
     }
 
     public void checkCollisionWithField(Ball ball) {
-        if(ball.getForm().up() == this.field.getTopY() || ball.getForm().down() == this.field.getBottomY()) {
+        if(ball.getForm().up() <= this.field.getTopY() || ball.getForm().down() >= this.field.getBottomY()) {
             ball.revertVerticalMovement();
         }
     }
 
-    public void checkCollisionWithBat(Ball ball) {
+    public void checkCollisionWithPaddle(Ball ball) {
         int randomAngle = (int) (Math.random() * 10);
 
         if (playerLeft.getPaddle().crosses(ball.getForm())) {
