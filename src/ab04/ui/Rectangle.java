@@ -104,11 +104,29 @@ public class Rectangle {
         this.y = y;
     }
 
+    /**
+     * src: java.awt.Rectangle
+     */
     public boolean crosses(Rectangle other) {
-        if (this.up() < other.down() || this.down() > other.up()) return false;
-        if (this.right() < other.left() || this.left() > other.right()) return false;
-        return true;
+        int tw = this.width;
+        int th = this.height;
+        int rw = other.width;
+        int rh = other.height;
+        if (rw <= 0 || rh <= 0 || tw <= 0 || th <= 0) {
+            return false;
+        }
+        int tx = this.x;
+        int ty = this.y;
+        int rx = other.x;
+        int ry = other.y;
+        rw += rx;
+        rh += ry;
+        tw += tx;
+        th += ty;
+        //      overflow || intersect
+        return ((rw < rx || rw > tx) &&
+                (rh < ry || rh > ty) &&
+                (tw < tx || tw > rx) &&
+                (th < ty || th > ry));
     }
-
-
 }

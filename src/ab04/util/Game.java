@@ -1,89 +1,111 @@
 package ab04.util;
 
+import ab04.gamelogic.BallPosition;
 import ab04.gamelogic.CollisionDetection;
 import ab04.ui.Ball;
 import ab04.ui.Gamefield;
 import ab04.ui.Player;
 
-import java.util.Objects;
+public class Game {
 
-public class Game implements Update {
-    private Update update;
-    private EinUndAusgabe io = new EinUndAusgabe();
+    private final int MAX_SCORE = 5;
     private final int MARGIN_PADDLE = 10;
+    private final int FPMS = 17;
+
+
+    private boolean won = false;
+    private boolean running = false;
+    private EinUndAusgabe io = new EinUndAusgabe();
     private CollisionDetection detection;
     private Gamefield field;
     private Player playerLeft, playerRight;
     private Ball ball;
     private Interaktionsbrett ib;
-    private final int FPMS = 17;
 
-    // TODO: 16.11.2022
     public Game() {
         this.ib = new Interaktionsbrett();
         this.field = new Gamefield();
+        this.ball = new Ball();
+        this.playerLeft = new Player(this.field, field.getLeftX() + MARGIN_PADDLE, field.getDIM().height / 2);
+        this.playerRight = new Player(this.field, field.getRightX() - this.playerLeft.getPaddle().getWidth() - MARGIN_PADDLE, field.getDIM().height / 2);
+        this.detection = new CollisionDetection(this.field, this.playerLeft, this.playerRight);
         ib.willTasteninfo(this);
-        this.field.setUpdate(this);
     }
 
-    // TODO: 16.11.2022
-    public void gameLoop() throws InterruptedException {
-        long difference;
-        while (true) {
-            long before = System.currentTimeMillis();
-            ib.abwischen();
-            field.update(this.field, this.ib);
-            playerLeft.getPaddle().drawFilling(ib);
-            playerRight.getPaddle().drawFilling(ib);
-            long after = System.currentTimeMillis();
-            difference = after - before;
-            Thread.sleep(FPMS - difference);
+    public void gameLoop() {
+        new Thread(() -> {
+            long difference;
+            while (!won) {
+                long before = System.currentTimeMillis();
+                ib.abwischen();
+                checkCollision();
+                moveBall();
+                update();
+                long after = System.currentTimeMillis();
+                difference = after - before;
+                try {
+                    Thread.sleep(FPMS - difference);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).start();
+    }
+
+    private void moveBall() {
+        this.ball.move(this.ball.getSpeedX(), this.ball.getSpeedY());
+    }
+
+    private void checkCollision() {
+        this.detection.checkCollisionWithField(this.ball);
+        this.detection.checkCollisionWithBat(this.ball);
+        if (ball.getPosition() == BallPosition.OUTSIDE_LEFT) {
+            playerRight.score();
+            ball.setRandomStartingPointRightSide();
+        }
+        if (ball.getPosition() == BallPosition.OUTSIDE_RIGHT) {
+            playerLeft.score();
+            ball.setRandomStartingPointLeftSide();
         }
     }
 
-    // TODO: 16.11.2022
-    public void initialisePositions() {
+    private void update() {
         this.field.draw(this.ib);
-        this.playerLeft = new Player(this.field, field.getLeftX() + MARGIN_PADDLE, field.getDIM().height / 2);
-        this.playerRight = new Player(this.field, field.getRightX() - this.playerLeft.getPaddle().getWidth() - MARGIN_PADDLE, field.getDIM().height / 2);
-        this.ib.neuesRechteck(this.playerLeft, "Player_Left", playerLeft.getPaddle().getX(), playerLeft.getPaddle().getY(), playerLeft.getPaddle().getWidth(), playerLeft.getPaddle().getHeight());
-        this.ib.neuesRechteck(this.playerRight, "Player_Right", playerRight.getPaddle().getX(), playerRight.getPaddle().getY(), playerRight.getPaddle().getWidth(), playerRight.getPaddle().getHeight());
         this.playerLeft.getPaddle().drawFilling(this.ib);
         this.playerRight.getPaddle().drawFilling(this.ib);
-        // Ball position must be set
-        this.ball = new Ball();
         this.ball.draw(this.ib);
+        drawScores();
+    }
 
+    public void initialisePositions() {
+        this.field.draw(this.ib);
+        this.playerLeft.draw(this.ib);
+        this.playerRight.draw(this.ib);
+        this.ball.setRandomStartingPointLeftSide();
+        this.ball.draw(this.ib);
+        drawScores();
+    }
+
+    private void drawScores() {
+        this.ib.neuerText(this.field.getDIM().width / 2 - 10, 30, Integer.toString(playerLeft.getScore()));
+        this.ib.neuerText(this.field.getDIM().width / 2 + 24, 30, Integer.toString(playerRight.getScore()));
     }
 
     public void tasteGedrueckt(String s) throws InterruptedException {
-        if (s.equals("s")) {
-            System.out.println("Spiel startet");
+
+        if (!running && s.equals("s")) {
+            running = true;
+            System.out.println("Game started");
             gameLoop();
         }
-        if (s.equals("a")) {
-            System.out.println("Player Movement");
-            playerLeft.moveUp();
+        if (running) {
+            switch (s) {
+                case "a" -> playerLeft.moveUp();
+                case "y" -> playerLeft.moveDown();
+                case "Oben" -> playerRight.moveUp();
+                case "Unten" -> playerRight.moveDown();
+                case "e" -> System.exit(0);
+            }
         }
-        if (s.equals("y")) {
-            System.out.println("Player Movement");
-            playerLeft.moveDown();
-        }
-        if (s.equals("Oben")) {
-            System.out.println("Player Movement");
-            playerRight.moveUp();
-        }
-        if (s.equals("Unten")) {
-            System.out.println("Player Movement");
-            playerRight.moveDown();
-        }
-        if (s.equals("e")) {
-            System.exit(1);
-        }
-    }
-
-    @Override
-    public void update(Gamefield field) {
-        this.field = field;
     }
 }

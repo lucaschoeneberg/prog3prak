@@ -1,5 +1,7 @@
 package ab04.ui;
 
+import ab04.util.Interaktionsbrett;
+
 public class Player implements Movable {
     private Gamefield gamefield;
     private Rectangle paddle;
@@ -21,12 +23,16 @@ public class Player implements Movable {
 
     public void moveUp() {
         if (this.paddle.getY() > this.gamefield.getTopY())
-            this.move(-1, -1);
+            this.move(0, -6);
     }
 
     public void moveDown() {
         if (this.paddle.getY()+this.paddle.getHeight() < this.gamefield.getBottomY())
-        this.move(1, 1);
+        this.move(0, 6);
+    }
+
+    public void draw(Interaktionsbrett ib) {
+        this.paddle.drawFilling(ib);
     }
 
     public void resetScore() {

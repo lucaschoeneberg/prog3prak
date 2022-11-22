@@ -1,12 +1,10 @@
 package ab04.ui;
 
 import ab04.util.Interaktionsbrett;
-import ab04.util.Update;
 
 import java.awt.*;
 
 public class Gamefield {
-    private Update update;
     private final int MARGIN = 10;
     private final Dimension IB_DIM = new Dimension(800, 700);
     private final Dimension FIELD_DIM = new Dimension(IB_DIM.width - MARGIN * 4, IB_DIM.height - MARGIN * 8);
@@ -51,13 +49,7 @@ public class Gamefield {
         return bottomY;
     }
 
-    public void setUpdate(Update update) {
-        this.update = update;
-    }
-
-    public void update(Gamefield field, Interaktionsbrett ib) {
-        this.draw(ib);
-        if (this.update != null)
-            this.update.update(field);
+    public Rectangle getField() {
+        return this.field;
     }
 }
