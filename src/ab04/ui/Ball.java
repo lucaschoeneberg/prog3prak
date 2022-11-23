@@ -23,7 +23,6 @@ public class Ball implements Movable {
         this.setBallPosition();
     }
 
-
     @Override
     public void moveTo(int x, int y) {
         this.form.moveTo(x, y);
@@ -71,13 +70,20 @@ public class Ball implements Movable {
         return this.form;
     }
 
+    private void randomizeBallMovement(){
+        int randomizeBallMovement = (int) (Math.random() * 10);
+        if(randomizeBallMovement < 5) this.speedY *= -1;
+    }
+
     public void setRandomStartingPointLeftSide() {
+        randomizeBallMovement();
         int x = (int) (Math.random() * 320 + 40);
         int y = (int) (Math.random() * 600 + 20);
         this.moveTo(x, y);
     }
 
     public void setRandomStartingPointRightSide() {
+        randomizeBallMovement();
         int x = (int) (Math.random() * 320 + 360);
         int y = (int) (Math.random() * 600 + 20);
         this.moveTo(x, y);

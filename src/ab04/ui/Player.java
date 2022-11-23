@@ -11,7 +11,7 @@ public class Player implements Movable {
     public Player(Gamefield gamefield, int paddleX, int paddleY) {
         this.gamefield = gamefield;
         this.paddle = new Rectangle(paddleX, paddleY, gamefield.getDIM().width / 100, gamefield.getDIM().height / 10);
-        this.MOVEMENT_SPEED = this.paddle.getHeight() / 4;
+        this.MOVEMENT_SPEED = this.paddle.getHeight() / 2;
     }
 
     public Rectangle getPaddle() {
