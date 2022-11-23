@@ -59,7 +59,7 @@ public class Game {
     }
 
     private void moveBall() {
-            this.ball.move(this.ball.getSpeedX(), this.ball.getSpeedY());
+        this.ball.move(this.ball.getSpeedX(), this.ball.getSpeedY());
     }
 
     private void updateScreen() {
@@ -128,10 +128,12 @@ public class Game {
             switch (s) {
                 case "a" -> playerLeft.moveUp();
                 case "y" -> playerLeft.moveDown();
-                case "Oben" -> playerRight.moveUp();
-                case "Unten" -> playerRight.moveDown();
-                case "Rechts" -> ball.makeBallMoveFaster();
-                case "Links" -> ball.makeBallMoveSlower();
+                //Oben für windows k für mac
+                case "Oben", "k" -> playerRight.moveUp();
+                //Unten für windows m für mac
+                case "Unten", "m" -> playerRight.moveDown();
+                case "Rechts" , "z" -> ball.makeBallMoveFaster();
+                case "Links", "t" -> ball.makeBallMoveSlower();
             }
         }
     }
