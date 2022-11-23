@@ -10,11 +10,11 @@ public class Game {
 
     private final int MAX_SCORE = 5, MARGIN_PADDLE = 10, FPMS = 17;
     private boolean won = false, running = false, scored = false;
-    private CollisionDetection detection;
-    private Gamefield field;
-    private Player playerLeft, playerRight;
-    private Ball ball;
-    private Interaktionsbrett ib;
+    private final CollisionDetection detection;
+    private final Gamefield field;
+    private final Player playerLeft, playerRight;
+    private final Ball ball;
+    private final Interaktionsbrett ib;
 
     public Game() {
         this.ib = new Interaktionsbrett();
@@ -50,7 +50,6 @@ public class Game {
             playerRight.score();
             this.scored = true;
             ball.setRandomStartingPointRightSide();
-
         }
         if (ball.getPosition() == BallPosition.OUTSIDE_RIGHT) {
             playerLeft.score();
@@ -60,12 +59,7 @@ public class Game {
     }
 
     private void moveBall() {
-        int randomizeBallMovement = (int) (Math.random() * 10);
-        if (randomizeBallMovement > 5) {
             this.ball.move(this.ball.getSpeedX(), this.ball.getSpeedY());
-        } else {
-            this.ball.move(this.ball.getSpeedX(), this.ball.getSpeedY() * -1);
-        }
     }
 
     private void updateScreen() {
@@ -85,7 +79,6 @@ public class Game {
 
     private void drawWinningMessage() {
         this.ib.neuerText(this.field.getDIM().width / 4 + 50, this.field.getDIM().height / 2, "Spieler " + (this.playerLeft.getScore() == MAX_SCORE ? "links" : "rechts") + " hat gewonnen!\n Drücke S zum Neustart");
-
     }
 
     public void gameLoop() {

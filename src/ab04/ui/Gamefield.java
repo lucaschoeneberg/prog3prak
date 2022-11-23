@@ -7,9 +7,9 @@ public class Gamefield {
     private final int MARGIN = 10;
     private final Dimension IB_DIM = new Dimension(800, 700);
     private final Dimension FIELD_DIM = new Dimension(IB_DIM.width - MARGIN * 4, IB_DIM.height - MARGIN * 8);
-    private int leftX, topY, rightX, bottomY;
+    private final int leftX, topY, rightX, bottomY;
 
-    private Rectangle field;
+    private final Rectangle field;
 
     public Gamefield() {
         this.field = new Rectangle(MARGIN, MARGIN, FIELD_DIM.width, FIELD_DIM.height);

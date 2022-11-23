@@ -8,7 +8,7 @@ public class Ball implements Movable {
     private final int MAX_SPEED = 10, MIN_SPEED = 1;
     private int speedX, speedY;
     private BallPosition position;
-    private Rectangle form;
+    private final Rectangle form;
 
     public Ball() {
         this.position = BallPosition.WITHIN_FIELD;
@@ -23,6 +23,8 @@ public class Ball implements Movable {
         this.setBallPosition();
     }
 
+
+    @Override
     public void moveTo(int x, int y) {
         this.form.moveTo(x, y);
     }
