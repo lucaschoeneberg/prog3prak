@@ -1,4 +1,4 @@
-package com.example.prog3_ab5;
+package com.example.prog3_ab6;
 
 import org.junit.Test;
 
