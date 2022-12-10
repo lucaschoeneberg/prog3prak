@@ -1,4 +1,4 @@
-package com.example.prog3_ab6;
+package com.example.prog3_ab06;
 
 import androidx.appcompat.app.AppCompatActivity;
 

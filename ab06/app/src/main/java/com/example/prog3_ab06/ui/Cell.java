@@ -1,4 +1,4 @@
-package com.example.prog3_ab6.ui;
+package com.example.prog3_ab06.ui;
 
 public class Cell {
     private CellType type;
