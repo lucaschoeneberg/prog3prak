@@ -17,10 +17,10 @@ public class MineGrid {
     }
 
     private void minePlacer() {
-       int mineCounter = 0;
+        int mineCounter = 0;
         while (mineCounter <= amountMines) {
-            int randomX = (int) Math.random() * lengthOfField;
-            int randomY = (int) Math.random() * lengthOfField;
+            int randomX = (int) (Math.random() * lengthOfField);
+            int randomY = (int) (Math.random() * lengthOfField);
 
             if (!gameGrid[randomX][randomY].isMine()) {
                 gameGrid[randomX][randomY].setMine();
