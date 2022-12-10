@@ -22,8 +22,8 @@ public class Cell {
         return type == CellType.MINE;
     }
 
-    public void setMine(Boolean cellType) {
-        this.type = cellType ? CellType.MINE : CellType.BLANK;
+    public void setMine() {
+        this.type = CellType.BLANK;
     }
 
     public boolean isUnrevealed() {
