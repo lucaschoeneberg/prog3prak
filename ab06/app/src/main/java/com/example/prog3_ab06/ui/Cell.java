@@ -2,6 +2,8 @@ package com.example.prog3_ab06.ui;
 
 import android.graphics.Color;
 
+import com.example.prog3_ab06.logic.MineGrid;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,16 +20,16 @@ public class Cell {
         this.size = size;
     }
 
-    public void setInitValues(Cell[][] array) {
+    public void setInitValues(MineGrid grid) {
         List<Cell> cellsList = new ArrayList<>();
-        cellsList.add(array[posX + 1][posY - 1]);
-        cellsList.add(array[posX - 1][posY + 1]);
-        cellsList.add(array[posX][posY + 1]);
-        cellsList.add(array[posX + 1][posY + 1]);
-        cellsList.add(array[posX - 1][posY]);
-        cellsList.add(array[posX + 1][posY]);
-        cellsList.add(array[posX - 1][posY - 1]);
-        cellsList.add(array[posX][posY - 1]);
+        cellsList.add(grid.cellAt(posX + 1, posY - 1));
+        cellsList.add(grid.cellAt(posX - 1, posY + 1));
+        cellsList.add(grid.cellAt(posX, posY + 1));
+        cellsList.add(grid.cellAt(posX + 1, posY + 1));
+        cellsList.add(grid.cellAt(posX - 1, posY));
+        cellsList.add(grid.cellAt(posX + 1, posY));
+        cellsList.add(grid.cellAt(posX - 1, posY - 1));
+        cellsList.add(grid.cellAt(posX, posY - 1));
 
         int countBombs = 0;
         for (Cell cell : cellsList) if (cell != null) if (cell.isMine()) countBombs++;

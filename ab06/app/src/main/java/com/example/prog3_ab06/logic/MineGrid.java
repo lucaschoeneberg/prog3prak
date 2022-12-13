@@ -23,7 +23,7 @@ public class MineGrid {
 
         for (int x = 0; x < lengthOfField; x++)
             for (int y = 0; y < lengthOfField; y++)
-                gameGrid[x][y].setInitValues(gameGrid);
+                gameGrid[x][y].setInitValues(this);
     }
 
     private void minePlacer() {
@@ -39,7 +39,7 @@ public class MineGrid {
         }
     }
 
-    private Cell cellAt(int x, int y) {
+    public Cell cellAt(int x, int y) {
         if (x < 0 || x >= gameGrid.length || y < 0 || y >= gameGrid.length) return null;
         return gameGrid[x][y];
     }
