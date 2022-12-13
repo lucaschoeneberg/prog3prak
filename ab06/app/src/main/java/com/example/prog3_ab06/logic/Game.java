@@ -13,16 +13,14 @@ public class Game {
     private boolean flagMode;
     private boolean clearMode;
     private int flagCount;
-    private int numberBombs;
     private boolean timeExpired;
 
-    public Game(int size, int numberBombs) {
+    public Game(int size) {
         this.gameOver = false;
         this.flagMode = false;
         this.clearMode = true;
         this.timeExpired = false;
         this.flagCount = 0;
-        this.numberBombs = numberBombs;
         mineGrid = new MineGrid(size);
     }
 
@@ -126,9 +124,5 @@ public class Game {
 
     public int getFlagCount() {
         return flagCount;
-    }
-
-    public int getNumberBombs() {
-        return numberBombs;
     }
 }
