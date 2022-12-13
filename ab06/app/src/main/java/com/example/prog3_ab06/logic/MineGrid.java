@@ -39,6 +39,9 @@ public class MineGrid {
         }
     }
 
+    public Cell[][] getGameGrid() {
+        return gameGrid;
+    }
 }
 
 

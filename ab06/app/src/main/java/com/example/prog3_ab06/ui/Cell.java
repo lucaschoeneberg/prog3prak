@@ -54,6 +54,10 @@ public class Cell {
         return status == CellStatus.UNREVEALED;
     }
 
+    public void setRevealed() {
+        this.status = CellStatus.REVEALED;
+    }
+
     public int getColor() {
         switch (neighboursMineCount) {
             case 1: {
