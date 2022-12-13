@@ -16,7 +16,7 @@ public class MineGrid {
 
         for (int x = 0; x < lengthOfField; x++) {
             for (int y = 0; y < lengthOfField; y++) {
-                gameGrid[x][y] = new Cell();
+                gameGrid[x][y] = new Cell(x, y, lengthOfField/11);
             }
         }
         minePlacer();

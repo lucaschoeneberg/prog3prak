@@ -11,7 +11,6 @@ import android.text.method.MovementMethod;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.example.prog3_ab5.R;
 
 import java.time.LocalDateTime;
 import java.util.Timer;

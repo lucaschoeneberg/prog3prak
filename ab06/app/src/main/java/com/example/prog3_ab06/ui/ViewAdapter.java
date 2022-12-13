@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.prog3_ab06.R;
 import com.example.prog3_ab06.helper.OnCellClickListener;
+import com.example.prog3_ab06.R;
 
-public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MineViewHolder> {
+public class
+ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MineViewHolder> {
     private Cell[] cells;
     private OnCellClickListener listener;
 

@@ -9,10 +9,13 @@ public class Cell {
     private CellType type;
     private CellStatus status = CellStatus.UNREVEALED;
     private Integer neighboursMineCount;
-    private Integer Size;
+    private Integer size, posX, posY;
 
-    public Cell() {
+    public Cell(int posX, int posY, int size) {
         this.type = CellType.BLANK;
+        this.posX = posX;
+        this.posY = posY;
+        this.size = size;
     }
 
     public void setInitValues(Integer neighboursMineCount) {
@@ -56,7 +59,7 @@ public class Cell {
         }
     }
 
-    public List<Cell> getNeighbours(Cell[][] list, int xPos,int yPos){
+ /*   public List<Cell> getNeighbours(Cell[][] list, int xPos,int yPos){
         List<Cell> adjacentCells = new ArrayList<>();
 
         List<Cell> cellsList = new ArrayList<>();
@@ -76,9 +79,21 @@ public class Cell {
         }
 
         return adjacentCells;
-    }
+    }*/
 
     public Integer getNeighboursMineCount() {
         return neighboursMineCount;
+    }
+
+    public int getX() {
+        return this.posX;
+    }
+
+    public int getY() {
+        return this.posY;
+    }
+
+    public int getSize() {
+        return this.size;
     }
 }
