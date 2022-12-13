@@ -45,8 +45,7 @@ public class Game {
 
             while (toCheckAdjacents.size() > 0) {
                 Cell c = toCheckAdjacents.get(0);
-                int[] cellPos = {c.getX(), c.getY()};
-                for (Cell adjacent : getMineGrid().adjacentCells(cellPos[0], cellPos[1])) {
+                for (Cell adjacent : getMineGrid().getGameGrid()[c.getX()][c.getY()].getCellsList()) {
                     if (adjacent.isBlanc()) {
                         if (!toClear.contains(adjacent)) {
                             if (!toCheckAdjacents.contains(adjacent)) {
@@ -72,27 +71,26 @@ public class Game {
     public void flag(Cell cell) {
         cell.setFlagged(!cell.isFlagged());
         int count = 0;
-        for (Cell c : getMineGrid().getCells()) {
-            if (c.isFlagged()) {
-                count++;
-            }
-        }
+        for (Cell[] cA : getMineGrid().getGameGrid())
+            for (Cell c : cA)
+                if (c.isFlagged()) count++;
         flagCount = count;
     }
 
     public boolean isGameWon() {
         int numbersUnrevealed = 0;
-        for (Cell c : getMineGrid().getCells()) {
-            if (c.getValue() != Cell.BOMB && c.getValue() != Cell.BLANK && !c.isRevealed()) {
-                numbersUnrevealed++;
-            }
-        }
+        for (Cell[] cA : getMineGrid().getGameGrid())
+            for (Cell c : cA)
+                if (c.isUnrevealed())
+                    numbersUnrevealed++;
 
-        if (numbersUnrevealed == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return numbersUnrevealed == 0;
+    }
+
+    public void revealBombs() {
+        for (Cell[] cA : getMineGrid().getGameGrid())
+            for (Cell c : cA)
+                if (c.isMine()) c.setRevealed();
     }
 
     public void toggleMode() {

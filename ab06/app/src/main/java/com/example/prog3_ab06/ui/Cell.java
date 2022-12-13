@@ -11,33 +11,47 @@ public class Cell {
     private CellType type;
     private CellStatus status = CellStatus.UNREVEALED;
     private Integer neighboursMineCount;
-    private Integer size, posX, posY;
+    private final Integer size;
+    private final Integer posX;
+    private final Integer posY;
+    private final List<Cell> cellsList;
 
     public Cell(int posX, int posY, int size) {
         this.type = CellType.BLANK;
         this.posX = posX;
         this.posY = posY;
         this.size = size;
+        cellsList = new ArrayList<>();
     }
 
     public void setInitValues(MineGrid grid) {
-        List<Cell> cellsList = new ArrayList<>();
-        cellsList.add(grid.cellAt(posX + 1, posY - 1));
-        cellsList.add(grid.cellAt(posX - 1, posY + 1));
-        cellsList.add(grid.cellAt(posX, posY + 1));
-        cellsList.add(grid.cellAt(posX + 1, posY + 1));
-        cellsList.add(grid.cellAt(posX - 1, posY));
-        cellsList.add(grid.cellAt(posX + 1, posY));
-        cellsList.add(grid.cellAt(posX - 1, posY - 1));
-        cellsList.add(grid.cellAt(posX, posY - 1));
+        cellsList.clear();
+
+        addToList(grid.cellAt(posX + 1, posY - 1));
+        addToList(grid.cellAt(posX - 1, posY + 1));
+        addToList(grid.cellAt(posX, posY + 1));
+        addToList(grid.cellAt(posX + 1, posY + 1));
+        addToList(grid.cellAt(posX - 1, posY));
+        addToList(grid.cellAt(posX + 1, posY));
+        addToList(grid.cellAt(posX - 1, posY - 1));
+        addToList(grid.cellAt(posX, posY - 1));
 
         int countBombs = 0;
         for (Cell cell : cellsList) if (cell != null) if (cell.isMine()) countBombs++;
         if (countBombs > 0) this.neighboursMineCount = countBombs;
     }
 
+    void addToList(Cell c) {
+        if (c != null) cellsList.add(c);
+    }
+
     public boolean isFlagged() {
         return status == CellStatus.UNREVEALEDFLAG;
+    }
+
+    public void setFlagged(Boolean state) {
+        if (state) status = CellStatus.UNREVEALEDFLAG;
+        else status = CellStatus.UNREVEALED;
     }
 
     public boolean isMine() {
@@ -49,11 +63,11 @@ public class Cell {
     }
 
     public void setMine() {
-        this.type = CellType.BLANK;
+        this.type = CellType.MINE;
     }
 
     public boolean isUnrevealed() {
-        return status == CellStatus.UNREVEALED;
+        return status == CellStatus.UNREVEALED || status == CellStatus.UNREVEALEDFLAG;
     }
 
     public void setRevealed() {
@@ -63,13 +77,13 @@ public class Cell {
     public int getColor() {
         switch (neighboursMineCount) {
             case 1: {
-                return Color.BLUE;
+                return Color.parseColor("#7291A4");
             }
             case 2: {
-                return Color.GREEN;
+                return Color.parseColor("#3A8556");
             }
             case 3: {
-                return Color.RED;
+                return Color.parseColor("#D86E3A");
             }
             default: {
                 return Color.WHITE;
@@ -77,8 +91,10 @@ public class Cell {
         }
     }
 
-    public Integer getNeighboursMineCount() {
-        return neighboursMineCount;
+    public String getNeighboursMineCount() {
+        if (neighboursMineCount != null)
+            return neighboursMineCount.toString();
+        else return "";
     }
 
     public int getX() {
@@ -91,5 +107,9 @@ public class Cell {
 
     public int getSize() {
         return this.size;
+    }
+
+    public List<Cell> getCellsList() {
+        return cellsList;
     }
 }

@@ -2,13 +2,15 @@ package com.example.prog3_ab06.logic;
 
 import com.example.prog3_ab06.ui.Cell;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class MineGrid {
+public class MineGrid implements Iterator<Cell> {
     private Cell[][] gameGrid;
     private final int amountMines = 10;
     private final int lengthOfField;
+    private int rowIndex;
+    private int columnIndex;
 
     public MineGrid(int size) {
         lengthOfField = size;
@@ -46,5 +48,24 @@ public class MineGrid {
 
     public Cell[][] getGameGrid() {
         return this.gameGrid;
+    }
+
+    @Override
+    public boolean hasNext() {
+        if (rowIndex >= gameGrid.length)
+            return false;
+        return columnIndex < gameGrid[rowIndex].length ||
+                (rowIndex < gameGrid.length && rowIndex != gameGrid.length - 1);
+    }
+
+    @Override
+    public Cell next() {
+        if (!hasNext())
+            throw new NoSuchElementException();
+        if (columnIndex >= gameGrid[rowIndex].length) {
+            rowIndex++;
+            columnIndex = 0;
+        }
+        return gameGrid[rowIndex][columnIndex++];
     }
 }

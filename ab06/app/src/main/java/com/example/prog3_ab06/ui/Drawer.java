@@ -23,7 +23,7 @@ public class Drawer {
             painter.setColor(cell.getColor());
             canvas.drawRect(cell.getX(), cell.getY(), cell.getX() + cell.getSize(), cell.getY() + cell.getSize(), painter);
             painter.setColor(Color.BLACK);
-            canvas.drawText(cell.getNeighboursMineCount().toString(), cell.getX() + cell.getSize() / 2, cell.getY() + cell.getSize() / 2, painter);
+            canvas.drawText(cell.getNeighboursMineCount(), cell.getX() + cell.getSize() / 2, cell.getY() + cell.getSize() / 2, painter);
         }
     }
 
