@@ -1,7 +1,5 @@
 package com.example.prog3_ab06.logic;
 
-import android.util.Log;
-
 import com.example.prog3_ab06.ui.Cell;
 
 import java.util.ArrayList;
