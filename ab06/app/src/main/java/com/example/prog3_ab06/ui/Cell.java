@@ -18,8 +18,20 @@ public class Cell {
         this.size = size;
     }
 
-    public void setInitValues(Integer neighboursMineCount) {
-        this.neighboursMineCount = neighboursMineCount;
+    public void setInitValues(Cell[][] array) {
+        List<Cell> cellsList = new ArrayList<>();
+        cellsList.add(cellAt(posX + 1, posY - 1, array));
+        cellsList.add(cellAt(posX - 1, posY + 1, array));
+        cellsList.add(cellAt(posX, posY + 1, array));
+        cellsList.add(cellAt(posX + 1, posY + 1, array));
+        cellsList.add(cellAt(posX - 1, posY, array));
+        cellsList.add(cellAt(posX + 1, posY, array));
+        cellsList.add(cellAt(posX - 1, posY - 1, array));
+        cellsList.add(cellAt(posX, posY - 1, array));
+
+        int countBombs = 0;
+        for (Cell cell : cellsList) if (cell != null) if (cell.isMine()) countBombs++;
+        if (countBombs > 0) this.neighboursMineCount = countBombs;
     }
 
     public boolean isFlagged() {
@@ -53,33 +65,16 @@ public class Cell {
             case 3: {
                 return Color.RED;
             }
-            default:{
+            default: {
                 return Color.WHITE;
             }
         }
     }
 
- /*   public List<Cell> getNeighbours(Cell[][] list, int xPos,int yPos){
-        List<Cell> adjacentCells = new ArrayList<>();
-
-        List<Cell> cellsList = new ArrayList<>();
-        cellsList.add(cellAt(xPos-1, yPos));
-        cellsList.add(cellAt(x+1, y));
-        cellsList.add(cellAt(x-1, y-1));
-        cellsList.add(cellAt(x, y-1));
-        cellsList.add(cellAt(x+1, y-1));
-        cellsList.add(cellAt(x-1, y+1));
-        cellsList.add(cellAt(x, y+1));
-        cellsList.add(cellAt(x+1, y+1));
-
-        for (Cell cell: cellsList) {
-            if (cell != null) {
-                adjacentCells.add(cell);
-            }
-        }
-
-        return adjacentCells;
-    }*/
+    private Cell cellAt(int x, int y, Cell[][] array) {
+        if (x < 0 || x >= array.length || y < 0 || y >= array.length) return null;
+        return array[x][y * array.length];
+    }
 
     public Integer getNeighboursMineCount() {
         return neighboursMineCount;

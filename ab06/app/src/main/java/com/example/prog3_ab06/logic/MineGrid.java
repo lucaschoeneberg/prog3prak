@@ -16,11 +16,14 @@ public class MineGrid {
 
         for (int x = 0; x < lengthOfField; x++) {
             for (int y = 0; y < lengthOfField; y++) {
-                gameGrid[x][y] = new Cell(x, y, lengthOfField/11);
+                gameGrid[x][y] = new Cell(x, y, lengthOfField / 11);
             }
         }
         minePlacer();
-        mineCounter();
+
+        for (int x = 0; x < lengthOfField; x++)
+            for (int y = 0; y < lengthOfField; y++)
+                gameGrid[x][y].setInitValues(gameGrid);
     }
 
     private void minePlacer() {
@@ -34,31 +37,6 @@ public class MineGrid {
                 mineCounter++;
             }
         }
-    }
-
-    private void mineCounter() {
-        for (int x = 0; x < lengthOfField; x++) {
-            for (int y = 0; y < lengthOfField; y++) {
-                int countBombs = 0;
-                List<Cell> cellsList = new ArrayList<>();
-                cellsList.add(cellAt(x - 1, y));
-                cellsList.add(cellAt(x + 1, y));
-                cellsList.add(cellAt(x - 1, y - 1));
-                cellsList.add(cellAt(x, y - 1));
-                cellsList.add(cellAt(x + 1, y - 1));
-                cellsList.add(cellAt(x - 1, y + 1));
-                cellsList.add(cellAt(x, y + 1));
-                cellsList.add(cellAt(x + 1, y + 1));
-
-                for (Cell cell : cellsList) if (cell != null) if (cell.isMine()) countBombs++;
-                if (countBombs > 0) cellAt(x, y).setInitValues(countBombs);
-            }
-        }
-    }
-
-    public Cell cellAt(int x, int y) {
-        if (x < 0 || x >= lengthOfField || y < 0 || y >= lengthOfField) return null;
-        return gameGrid[x][y * lengthOfField];
     }
 
 }
