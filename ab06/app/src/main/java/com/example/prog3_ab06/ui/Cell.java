@@ -20,14 +20,14 @@ public class Cell {
 
     public void setInitValues(Cell[][] array) {
         List<Cell> cellsList = new ArrayList<>();
-        cellsList.add(cellAt(posX + 1, posY - 1, array));
-        cellsList.add(cellAt(posX - 1, posY + 1, array));
-        cellsList.add(cellAt(posX, posY + 1, array));
-        cellsList.add(cellAt(posX + 1, posY + 1, array));
-        cellsList.add(cellAt(posX - 1, posY, array));
-        cellsList.add(cellAt(posX + 1, posY, array));
-        cellsList.add(cellAt(posX - 1, posY - 1, array));
-        cellsList.add(cellAt(posX, posY - 1, array));
+        cellsList.add(array[posX + 1][posY - 1]);
+        cellsList.add(array[posX - 1][posY + 1]);
+        cellsList.add(array[posX][posY + 1]);
+        cellsList.add(array[posX + 1][posY + 1]);
+        cellsList.add(array[posX - 1][posY]);
+        cellsList.add(array[posX + 1][posY]);
+        cellsList.add(array[posX - 1][posY - 1]);
+        cellsList.add(array[posX][posY - 1]);
 
         int countBombs = 0;
         for (Cell cell : cellsList) if (cell != null) if (cell.isMine()) countBombs++;
@@ -69,11 +69,6 @@ public class Cell {
                 return Color.WHITE;
             }
         }
-    }
-
-    private Cell cellAt(int x, int y, Cell[][] array) {
-        if (x < 0 || x >= array.length || y < 0 || y >= array.length) return null;
-        return array[x][y * array.length];
     }
 
     public Integer getNeighboursMineCount() {

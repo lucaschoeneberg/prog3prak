@@ -39,6 +39,9 @@ public class MineGrid {
         }
     }
 
+    private Cell cellAt(int x, int y) {
+        if (x < 0 || x >= gameGrid.length || y < 0 || y >= gameGrid.length) return null;
+        return gameGrid[x][y];
+    }
+
 }
-
-
