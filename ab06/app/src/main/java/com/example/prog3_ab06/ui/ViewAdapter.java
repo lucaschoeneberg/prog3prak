@@ -8,14 +8,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.prog3_ab06.helper.OnCellClickListener;
 import com.example.prog3_ab06.R;
 
 public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MineViewHolder> {
-    private Cell[] cells;
+    private Cell[][] cells;
     private OnCellClickListener listener;
 
-    public ViewAdapter(Cell[] cells, OnCellClickListener listener) {
+    public ViewAdapter(Cell[][] cells, OnCellClickListener listener) {
         this.cells = cells;
         this.listener = listener;
     }
@@ -29,7 +30,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MineViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MineViewHolder holder, int position) {
-        holder.bind(cells.get(position));
+        holder.bind(cells[position % 10][position / 10]);
         holder.setIsRecyclable(false);
     }
 
