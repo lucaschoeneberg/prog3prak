@@ -21,6 +21,10 @@ import com.example.prog3_ab06.helper.OnCellClickListener;
 import com.example.prog3_ab06.logic.Game;
 import com.example.prog3_ab06.ui.Cell;
 import com.example.prog3_ab06.ui.ViewAdapter;
+import android.view.Window;
+import android.view.WindowManager;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements OnCellClickListener {
     public static final long TIMER_LENGTH = 999000L;    // 999 seconds in milliseconds
@@ -41,7 +45,9 @@ public class MainActivity extends AppCompatActivity implements OnCellClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         recyclerView = findViewById(R.id.activity_main_grid);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 10));
 
