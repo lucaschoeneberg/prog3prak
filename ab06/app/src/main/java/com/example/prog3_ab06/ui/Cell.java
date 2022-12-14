@@ -27,14 +27,14 @@ public class Cell {
     public void setInitValues(MineGrid grid) {
         cellsList.clear();
 
-        addToList(grid.cellAt(posX + 1, posY - 1));
-        addToList(grid.cellAt(posX - 1, posY + 1));
-        addToList(grid.cellAt(posX, posY + 1));
-        addToList(grid.cellAt(posX + 1, posY + 1));
-        addToList(grid.cellAt(posX - 1, posY));
-        addToList(grid.cellAt(posX + 1, posY));
-        addToList(grid.cellAt(posX - 1, posY - 1));
-        addToList(grid.cellAt(posX, posY - 1));
+        addToList(grid.addNeighbourHelper(posX + 1, posY - 1));
+        addToList(grid.addNeighbourHelper(posX - 1, posY + 1));
+        addToList(grid.addNeighbourHelper(posX, posY + 1));
+        addToList(grid.addNeighbourHelper(posX + 1, posY + 1));
+        addToList(grid.addNeighbourHelper(posX - 1, posY));
+        addToList(grid.addNeighbourHelper(posX + 1, posY));
+        addToList(grid.addNeighbourHelper(posX - 1, posY - 1));
+        addToList(grid.addNeighbourHelper(posX, posY - 1));
 
         int countBombs = 0;
         for (Cell cell : cellsList) if (cell != null) if (cell.isMine()) countBombs++;
@@ -111,5 +111,9 @@ public class Cell {
 
     public List<Cell> getCellsList() {
         return cellsList;
+    }
+
+    public boolean isNumber() {
+        return neighboursMineCount != null;
     }
 }

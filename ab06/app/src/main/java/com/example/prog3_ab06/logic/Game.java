@@ -46,14 +46,14 @@ public class Game {
             while (toCheckAdjacents.size() > 0) {
                 Cell c = toCheckAdjacents.get(0);
                 for (Cell adjacent : getMineGrid().getGameGrid()[c.getX()][c.getY()].getCellsList()) {
-                    if (adjacent.isBlanc()) {
-                        if (!toClear.contains(adjacent)) {
-                            if (!toCheckAdjacents.contains(adjacent)) {
+                    if (adjacent.isBlanc() && !toClear.contains(adjacent)) {
+                        if (!toCheckAdjacents.contains(adjacent)) {
+                            if (!adjacent.isFlagged() && !adjacent.isMine())  {
                                 toCheckAdjacents.add(adjacent);
                             }
                         }
                     } else {
-                        if (!toClear.contains(adjacent)) {
+                        if (!toClear.contains(adjacent) && !adjacent.isFlagged() && !adjacent.isMine()) {
                             toClear.add(adjacent);
                         }
                     }

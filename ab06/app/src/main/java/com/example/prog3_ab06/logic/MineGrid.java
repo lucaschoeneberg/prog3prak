@@ -41,7 +41,7 @@ public class MineGrid implements Iterator<Cell> {
         }
     }
 
-    public Cell cellAt(int x, int y) {
+    public Cell addNeighbourHelper(int x, int y) {
         if (x < 0 || x >= gameGrid.length || y < 0 || y >= gameGrid.length) return null;
         return gameGrid[x][y];
     }
