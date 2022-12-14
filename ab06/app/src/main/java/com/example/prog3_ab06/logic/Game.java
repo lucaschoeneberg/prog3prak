@@ -37,7 +37,10 @@ public class Game {
 
         if (cell.isMine()) {
             gameOver = true;
-        } else if (cell.isBlanc()) {
+        }
+        else if (cell.isNumber())
+            cell.setRevealed();
+        else {
             List<Cell> toClear = new ArrayList<>();
             List<Cell> toCheckAdjacents = new ArrayList<>();
 
@@ -46,9 +49,11 @@ public class Game {
             while (toCheckAdjacents.size() > 0) {
                 Cell c = toCheckAdjacents.get(0);
                 for (Cell adjacent : getMineGrid().getGameGrid()[c.getX()][c.getY()].getCellsList()) {
+                    if(c.isNumber())
+                        break;
                     if (adjacent.isBlanc() && !toClear.contains(adjacent)) {
                         if (!toCheckAdjacents.contains(adjacent)) {
-                            if (!adjacent.isFlagged() && !adjacent.isMine())  {
+                            if (!adjacent.isFlagged() && !adjacent.isMine()) {
                                 toCheckAdjacents.add(adjacent);
                             }
                         }

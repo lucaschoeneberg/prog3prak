@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 
 public class MineGrid implements Iterator<Cell> {
     private final Cell[][] gameGrid;
-    private final int amountMines = 20;
+    private final int amountMines = 10;
     private final int lengthOfField;
     private int rowIndex;
     private int columnIndex;
