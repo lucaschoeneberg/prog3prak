@@ -2,7 +2,7 @@
     <string name="app_name">Prog 3 Aufgabe 06 Minesweeper</string>
 
     <string name="restart">restart</string>
-    <string name="flag"></string>
+    <string name="flag">🏳️</string>
     <string name="bomb">💥</string>
     <string name="default_count">000</string>
 </resources>
