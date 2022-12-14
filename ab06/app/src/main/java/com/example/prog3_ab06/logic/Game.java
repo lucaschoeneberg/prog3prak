@@ -23,7 +23,7 @@ public class Game {
     }
 
     public void handleCellClick(Cell cell) {
-        if (!gameOver && !isGameWon() && !timeExpired && cell.isUnrevealed()) {
+        if (!gameOver && !isGameWon() && !timeExpired && cell.isUnrevealed() && !cell.isFlagged()) {
             if (clearMode) {
                 clear(cell);
             } else if (flagMode) {
