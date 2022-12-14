@@ -23,8 +23,8 @@ public class Game {
     }
 
     public void handleCellClick(Cell cell) {
-        if (!gameOver && !isGameWon() && !timeExpired && cell.isUnrevealed() && !cell.isFlagged()) {
-            if (clearMode) {
+        if (!gameOver && !isGameWon() && !timeExpired && cell.isUnrevealed() ) {
+            if (clearMode && !cell.isFlagged()) {
                 clear(cell);
             } else if (flagMode) {
                 flag(cell);
@@ -37,8 +37,7 @@ public class Game {
 
         if (cell.isMine()) {
             gameOver = true;
-        }
-        else if (cell.isNumber())
+        } else if (cell.isNumber())
             cell.setRevealed();
         else {
             List<Cell> toClear = new ArrayList<>();
@@ -49,7 +48,7 @@ public class Game {
             while (toCheckAdjacents.size() > 0) {
                 Cell c = toCheckAdjacents.get(0);
                 for (Cell adjacent : getMineGrid().getGameGrid()[c.getX()][c.getY()].getCellsList()) {
-                    if(c.isNumber())
+                    if (c.isNumber())
                         break;
                     if (adjacent.isBlanc() && !toClear.contains(adjacent)) {
                         if (!toCheckAdjacents.contains(adjacent)) {
@@ -74,12 +73,13 @@ public class Game {
     }
 
     public void flag(Cell cell) {
-        cell.setFlagged(!cell.isFlagged());
-        int count = 0;
-        for (Cell[] cA : getMineGrid().getGameGrid())
-            for (Cell c : cA)
-                if (c.isFlagged()) count++;
-        flagCount = count;
+        if (cell.isFlagged()) {
+            cell.setFlagged(false);
+            flagCount--;
+        } else if (flagCount < 10) {
+            cell.setFlagged(true);
+            flagCount++;
+        }
     }
 
     public boolean isGameWon() {
