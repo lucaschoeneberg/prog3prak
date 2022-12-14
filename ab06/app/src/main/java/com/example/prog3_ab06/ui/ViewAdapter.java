@@ -93,6 +93,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MineViewHolder
                     background.setColorFilter(Color.parseColor("#D4D3CF"), PorterDuff.Mode.DST_OVER);
                 }
             } else if (cell.isFlagged()) {
+                background.setColorFilter(Color.parseColor("#C4C4C0"), PorterDuff.Mode.DST_OVER);
                 valueTextView.setText(R.string.flag);
             }
         }

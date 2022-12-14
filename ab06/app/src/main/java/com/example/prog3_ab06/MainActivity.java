@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnCellClickListen
 
         flag = findViewById(R.id.activity_main_flag);
         flagbackground = flag.getBackground();
-        flagbackground.setColorFilter(Color.parseColor("#454246"), PorterDuff.Mode.DST_OVER);
+        flagbackground.setColorFilter(Color.parseColor("#A3A3A0"), PorterDuff.Mode.DST_OVER);
         flag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements OnCellClickListen
                 if (game.isFlagMode()) {
                     flagbackground.setColorFilter(Color.parseColor("#D4D3CF"), PorterDuff.Mode.DST_OVER);
                 } else {
-                    flagbackground.setColorFilter(Color.parseColor("#454246"), PorterDuff.Mode.DST_OVER);
+                    flagbackground.setColorFilter(Color.parseColor("#A3A3A0"), PorterDuff.Mode.DST_OVER);
                 }
             }
         });
