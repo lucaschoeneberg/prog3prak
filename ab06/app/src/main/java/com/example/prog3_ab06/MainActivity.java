@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements OnCellClickListen
     public static final int GRID_SIZE = 10;
 
     private RecyclerView recyclerView;
-    private TextView smiley, timer, flag, flagsLeft;
+    private TextView restart, timer, flag, flagsLeft;
     private CountDownTimer countDownTimer;
     private Drawable flagbackground;
     private int secondsElapsed;
@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements OnCellClickListen
         viewAdapter = new ViewAdapter(game.getMineGrid().getGameGrid(), this);
         recyclerView.setAdapter(viewAdapter);
 
-        smiley = findViewById(R.id.activity_main_smiley);
-        smiley.setOnClickListener(new View.OnClickListener() {
+        restart = findViewById(R.id.activity_main_restart);
+        restart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 game = new Game(GRID_SIZE);
