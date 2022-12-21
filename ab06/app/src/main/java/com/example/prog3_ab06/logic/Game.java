@@ -89,7 +89,7 @@ public class Game {
                 if (c.isUnrevealed())
                     numbersUnrevealed++;
 
-        return numbersUnrevealed == 0;
+        return numbersUnrevealed == 90;
     }
 
     public void revealBombs() {

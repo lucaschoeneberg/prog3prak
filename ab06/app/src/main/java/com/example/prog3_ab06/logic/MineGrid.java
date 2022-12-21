@@ -29,7 +29,7 @@ public class MineGrid implements Iterator<Cell> {
     }
 
     private void minePlacer() {
-        int mineCounter = 0;
+        int mineCounter = 1;
         while (mineCounter <= amountMines) {
             int randomX = (int) (Math.random() * lengthOfField);
             int randomY = (int) (Math.random() * lengthOfField);
