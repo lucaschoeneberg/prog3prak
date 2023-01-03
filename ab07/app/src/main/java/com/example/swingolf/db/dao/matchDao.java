@@ -9,6 +9,8 @@ import androidx.room.Update;
 
 import com.example.swingolf.db.entity.match;
 
+import java.util.List;
+
 @Dao
 public interface matchDao {
     @Insert
@@ -21,8 +23,8 @@ public interface matchDao {
     void delete(match match);
 
     @Query("SELECT * FROM `match`")
-    LiveData<match> getAllMatches();
+    List<match> getAllMatches();
 
     @Query("SELECT * FROM `match` WHERE id=(:id)")
-    LiveData<match> getMatchById(int id);
+    List<match> getMatchById(int id);
 }

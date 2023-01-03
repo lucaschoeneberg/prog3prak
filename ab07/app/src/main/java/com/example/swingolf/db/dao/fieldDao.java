@@ -26,4 +26,6 @@ public interface fieldDao {
     @Query("SELECT * FROM field")
     ArrayList<field> getAllFields();
 
+    @Query("SELECT * FROM field JOIN 'match' ON field.id = 'match.fieldId' WHERE 'match.id' = :matchId LIMIT 1")
+    field getFieldByMatch(long matchId);
 }

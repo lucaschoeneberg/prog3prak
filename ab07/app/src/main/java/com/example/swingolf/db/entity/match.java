@@ -29,11 +29,31 @@ public class match {
     @ColumnInfo(name = "maxHole")
     public int maxHole;
 
+    @ColumnInfo(name = "isFinished")
+    public boolean isFinished;
+
     public match(String name ,long idField, String date, int maxHole) {
         this.name = name;
         this.idField = idField;
         this.date = date;
         this.maxHole = maxHole;
+        this.isFinished = false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(boolean finished) {
+        isFinished = finished;
     }
 
     public long getId() {
