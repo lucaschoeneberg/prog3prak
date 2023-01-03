@@ -20,13 +20,17 @@ public class match {
     @ColumnInfo(name = "filedId")
     public final long idField;
 
+    @ColumnInfo(name = "name")
+    public String name;
+
     @ColumnInfo(name = "date")
     public String date;
 
     @ColumnInfo(name = "maxHole")
     public int maxHole;
 
-    public match(long idField, String date, int maxHole) {
+    public match(String name ,long idField, String date, int maxHole) {
+        this.name = name;
         this.idField = idField;
         this.date = date;
         this.maxHole = maxHole;

@@ -9,6 +9,9 @@ import androidx.room.Update;
 
 import com.example.swingolf.db.entity.field;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 @Dao
 public interface fieldDao {
     @Insert
@@ -21,6 +24,6 @@ public interface fieldDao {
     void delete(field field);
 
     @Query("SELECT * FROM field")
-    LiveData<field> getAllFields();
+    ArrayList<field> getAllFields();
 
 }

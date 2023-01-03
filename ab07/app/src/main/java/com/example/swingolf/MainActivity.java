@@ -19,7 +19,7 @@ import com.example.swingolf.db.dao.*;
 import com.example.swingolf.db.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
-    AppDatabase database;
+    private AppDatabase database;
 
 
     @SuppressLint("SetTextI18n")

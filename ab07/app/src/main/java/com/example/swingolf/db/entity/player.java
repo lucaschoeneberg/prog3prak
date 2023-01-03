@@ -13,6 +13,9 @@ public class player {
     @ColumnInfo(name = "name")
     public String name;
 
+    @ColumnInfo(name = "isPlaying")
+    public boolean isPlaying;
+
     public player(String name) {
         this.name = name;
     }
@@ -21,16 +24,16 @@ public class player {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public boolean isPlaying() {
+        return isPlaying;
+    }
+
+    public void setPlaying(boolean playing) {
+        isPlaying = playing;
     }
 
     @Override
@@ -38,6 +41,7 @@ public class player {
         return "player{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", isPlaying=" + isPlaying +
                 '}';
     }
 }
