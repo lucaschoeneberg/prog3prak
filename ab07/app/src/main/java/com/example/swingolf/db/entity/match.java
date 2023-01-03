@@ -31,4 +31,32 @@ public class match {
         this.date = date;
         this.maxHole = maxHole;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIdField() {
+        return idField;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getMaxHole() {
+        return maxHole;
+    }
+
+    public void setMaxHole(int maxHole) {
+        this.maxHole = maxHole;
+    }
 }

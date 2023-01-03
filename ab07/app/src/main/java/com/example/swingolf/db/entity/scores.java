@@ -40,4 +40,44 @@ public class scores {
         this.score = score;
         this.holeNumber = holeNumber;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getMatchId() {
+        return matchId;
+    }
+
+    public void setMatchId(long matchId) {
+        this.matchId = matchId;
+    }
+
+    public long getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(long playerId) {
+        this.playerId = playerId;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getHoleNumber() {
+        return holeNumber;
+    }
+
+    public void setHoleNumber(int holeNumber) {
+        this.holeNumber = holeNumber;
+    }
 }
