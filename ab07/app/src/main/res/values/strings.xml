@@ -9,4 +9,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="swinggolf_scorecard">Swinggolf Scorecard</string>
+    <string name="add_player_text">Einen Spieler hinzufügen</string>
+    <string name="customTitle">Luca Schöneberg</string>
 </resources>
