@@ -4,5 +4,6 @@ import java.util.List;
 
 public class Homescreen {
     private List<Player> players;
+    private List<ScoreCard> scoreCards;
 
 }
