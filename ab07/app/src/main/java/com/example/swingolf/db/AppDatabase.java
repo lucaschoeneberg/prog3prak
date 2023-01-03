@@ -33,9 +33,25 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract scoresDao getScoresDao();
 
+    private static final String DB_NAME = "swingolf_database.db";
     private static volatile AppDatabase appDatabase;
     private static final int NUMBER_OF_THREADS = 2;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
+    public static synchronized AppDatabase getInstance(Context context) {
+        if (appDatabase == null) {
+            appDatabase = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "swingolf_database")
+                    .build();
+        }
+        return appDatabase;
+    }
+
+    private static AppDatabase create(final Context context) {
+        return Room.databaseBuilder(
+                context,
+                AppDatabase.class,
+                DB_NAME).build();
+    }
 
     static AppDatabase getDatabase(final Context context) {
         if (appDatabase == null) {
