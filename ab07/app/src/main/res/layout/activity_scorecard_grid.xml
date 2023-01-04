@@ -6,16 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".ScoreCardGrid">
 
-    <TableLayout
-        android:id="@+id/grid"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:columnWidth="100dp"
-        android:gravity="center"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentStart="true"
+        android:background="#3d455b"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <HorizontalScrollView
+            android:id="@+id/hscrll1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:id="@+id/grid"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:numColumns="auto_fit"
+                    android:stretchMode="columnWidth"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </RelativeLayout>
+        </HorizontalScrollView>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

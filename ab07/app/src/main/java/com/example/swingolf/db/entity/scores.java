@@ -31,7 +31,7 @@ public class scores {
     @ColumnInfo(name = "score")
     public int score;
 
-    @ColumnInfo(name = "scorecard")
+    @ColumnInfo(name = "holeNumber")
     public int holeNumber;
 
     public scores(long matchId, long playerId, int score, int holeNumber) {

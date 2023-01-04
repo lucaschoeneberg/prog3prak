@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -16,8 +18,10 @@ import com.example.swingolf.db.AppDatabase;
 import com.example.swingolf.db.entity.player;
 import com.example.swingolf.db.entity.match;
 import com.example.swingolf.db.entity.field;
+import com.example.swingolf.db.entity.scores;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreCardGrid extends AppCompatActivity {
@@ -43,11 +47,12 @@ public class ScoreCardGrid extends AppCompatActivity {
 
         int ANZAHL_SPIELER = 0;
         for (player player : players) if (player.isPlaying) ANZAHL_SPIELER++;
+        List<TextView> finish = new ArrayList<>();
 
         if (_field == null) {
             Intent intent2 = new Intent(this, match_attribute_selector.class);
             startActivity(intent2);
-        } else
+        } else {
             for (int i = 0; i < _field.getHoleCount(); i++) {
                 TableRow row = new TableRow(this);
                 TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
@@ -56,11 +61,13 @@ public class ScoreCardGrid extends AppCompatActivity {
                 if (i == 0) {
                     TextView title = new TextView(this);
                     title.setText(_match.getName());
+                    title.setTextColor(Color.parseColor("#FFFFFF"));
                     row.addView(title);
 
                     for (int j = 0; j < ANZAHL_SPIELER; j++) {
                         TextView player = new TextView(this);
                         player.setText(players.get(j).getName());
+                        player.setTextColor(Color.parseColor("#FFFFFF"));
                         row.addView(player);
                     }
                 }
@@ -68,12 +75,20 @@ public class ScoreCardGrid extends AppCompatActivity {
                 if (i > 0) {
                     TextView textView = new TextView(this);
                     textView.setText("Hole " + i + 1);
+                    textView.setTextColor(Color.parseColor("#FFFFFF"));
                     row.addView(textView);
 
                     for (int j = 0; j < ANZAHL_SPIELER; j++) {
+                        scores score = new scores(_match.id, players.get(j).getId(), 0, i);
+                        database.getScoresDao().insert(score);
+                        score = database.getScoresDao().getScrresById(_match.getId(), players.get(j).getId(), i);
+                        scores finalScore = score;
+
                         EditText editText = new EditText(this);
                         editText.setEnabled(true);
-                        editText.setInputType(16);
+                        editText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                        editText.setId(j);
+                        editText.setTextColor(Color.parseColor("#FFFFFF"));
                         editText.setTransformationMethod(null);
                         editText.addTextChangedListener(new TextWatcher() {
                             @Override
@@ -86,7 +101,9 @@ public class ScoreCardGrid extends AppCompatActivity {
 
                             @Override
                             public void afterTextChanged(Editable s) {
-
+                                finalScore.setScore(Integer.parseInt(String.valueOf(editText.getText())));
+                                database.getScoresDao().update(finalScore);
+                                finish.get((int) finalScore.getPlayerId() - 1).setText(editText.getText());
                             }
                         });
                         row.addView(editText);
@@ -94,5 +111,19 @@ public class ScoreCardGrid extends AppCompatActivity {
                 }
                 table.addView(row, i);
             }
+            TableRow row = new TableRow(this);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            row.setLayoutParams(lp);
+            row.addView(new TextView(this));
+            for (int j = 0; j < ANZAHL_SPIELER; j++) {
+                TextView finishPlayer = new TextView(this);
+                finishPlayer.setText("0");
+                finishPlayer.setTextColor(Color.parseColor("#FFFFFF"));
+                row.addView(finishPlayer);
+                finish.add(finishPlayer);
+            }
+            table.addView(row, _field.getHoleCount());
+        }
     }
 }
+

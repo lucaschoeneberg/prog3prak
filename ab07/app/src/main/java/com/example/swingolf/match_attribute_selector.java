@@ -83,7 +83,7 @@ public class match_attribute_selector extends AppCompatActivity {
                 }
 
                 if (_field == null) {
-                    _field = new field(actxFieldName.getText().toString(), spnNumberOfHoles.getSelectedItemPosition());
+                    _field = new field(actxFieldName.getText().toString(), Integer.parseInt(spnNumberOfHoles.getSelectedItem().toString()));
                     database.getFieldDao().insert(_field);
                     _field = database.getFieldDao().getAllFields().get(database.getFieldDao().getAllFields().size() - 1);
                 }

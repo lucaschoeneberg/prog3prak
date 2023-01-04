@@ -21,7 +21,7 @@ import com.example.swingolf.db.entity.scores;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {player.class, match.class, matchPlayerJoin.class, field.class, scores.class}, version = 3, exportSchema = false)
+@Database(entities = {player.class, match.class, matchPlayerJoin.class, field.class, scores.class}, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract fieldDao getFieldDao();

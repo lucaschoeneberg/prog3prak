@@ -8,6 +8,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.List;
+
 @Dao
 public interface scoresDao {
     @Insert
@@ -20,5 +22,8 @@ public interface scoresDao {
     void delete(scores score);
 
     @Query("SELECT * FROM scores")
-    scores getAllScores();
+    List<scores> getAllScores();
+
+    @Query("SELECT * FROM scores WHERE matchId=:matchId AND playerId=:playerId AND holeNumber=:holeNumber")
+    scores getScrresById(long matchId, long playerId, int holeNumber);
 }
