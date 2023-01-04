@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 
 import com.example.swingolf.db.dao.fieldDao;
 import com.example.swingolf.db.dao.matchDao;
@@ -20,7 +21,7 @@ import com.example.swingolf.db.entity.scores;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {player.class, match.class, matchPlayerJoin.class, field.class, scores.class}, version = 1, exportSchema = false)
+@Database(entities = {player.class, match.class, matchPlayerJoin.class, field.class, scores.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract fieldDao getFieldDao();
@@ -64,5 +65,29 @@ public abstract class AppDatabase extends RoomDatabase {
             }
         }
         return appDatabase;
+    }
+
+    public static void destroyInstance() {
+        appDatabase = null;
+    }
+
+    public static Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(androidx.sqlite.db.SupportSQLiteDatabase database) {
+            //delete all old tables
+            database.execSQL("DROP TABLE IF EXISTS player");
+            database.execSQL("DROP TABLE IF EXISTS 'match'");
+            database.execSQL("DROP TABLE IF EXISTS matchPlayerJoin");
+            database.execSQL("DROP TABLE IF EXISTS field");
+            database.execSQL("DROP TABLE IF EXISTS scores");
+        }
+    };
+
+    public static void dropAllTables(androidx.sqlite.db.SupportSQLiteDatabase database) {
+        database.execSQL("DROP TABLE IF EXISTS player");
+        database.execSQL("DROP TABLE IF EXISTS 'match'");
+        database.execSQL("DROP TABLE IF EXISTS matchPlayerJoin");
+        database.execSQL("DROP TABLE IF EXISTS field");
+        database.execSQL("DROP TABLE IF EXISTS scores");
     }
 }

@@ -3,6 +3,7 @@ package com.example.swingolf;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,23 +27,28 @@ public class ScoreCardGrid extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scorecard_grid);
 
-        AppDatabase database = Room.databaseBuilder(this, AppDatabase.class, "swingolf_database2.db").allowMainThreadQueries().build();
+        AppDatabase database = Room.databaseBuilder(this, AppDatabase.class, "swingolf_database2.db").fallbackToDestructiveMigration().allowMainThreadQueries().build();
 
         TableLayout table = (TableLayout) findViewById(R.id.grid);
 
         List<player> players = database.getPlayerDao().getAllPlayers();
         List<match> matches = database.getMatchDao().getAllMatches();
+        List<field> fields = database.getFieldDao().getAllFields();
 
+        match _match = matches.get(matches.size() - 1);
 
-        match _match = null;
-        for (match match : matches) if (!match.isFinished) _match = match;
-        if (_match != null) {
-            field field = database.getFieldDao().getFieldByMatch(_match.getId());
+        field _field = null;
+        for (field f : fields)
+            if (f.getId() == _match.getIdField()) _field = f;
 
-            int ANZAHL_SPIELER = 0;
-            for (player player : players) if (player.isPlaying) ANZAHL_SPIELER++;
+        int ANZAHL_SPIELER = 0;
+        for (player player : players) if (player.isPlaying) ANZAHL_SPIELER++;
 
-            for (int i = 0; i < field.holeCount; i++) {
+        if (_field == null) {
+            Intent intent2 = new Intent(this, match_attribute_selector.class);
+            startActivity(intent2);
+        } else
+            for (int i = 0; i < _field.getHoleCount(); i++) {
                 TableRow row = new TableRow(this);
                 TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                 row.setLayoutParams(lp);
@@ -69,16 +75,18 @@ public class ScoreCardGrid extends AppCompatActivity {
                         editText.setEnabled(true);
                         editText.setInputType(16);
                         editText.setTransformationMethod(null);
-                        editText.addTextChangedListener(new TextWatcher(){
+                        editText.addTextChangedListener(new TextWatcher() {
                             @Override
-                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                            }
 
                             @Override
-                            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            }
 
                             @Override
                             public void afterTextChanged(Editable s) {
-                                
+
                             }
                         });
                         row.addView(editText);
@@ -86,6 +94,5 @@ public class ScoreCardGrid extends AppCompatActivity {
                 }
                 table.addView(row, i);
             }
-        }
     }
 }

@@ -18,14 +18,14 @@ import androidx.room.PrimaryKey;
                         childColumns = "playerId",
                         onDelete = CASCADE)})
 public class scores {
-    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     public long id;
 
-    @ColumnInfo(name = "matchId")
+    @ColumnInfo(name = "matchId", index = true)
     public long matchId;
 
-    @ColumnInfo(name = "playerId")
+    @ColumnInfo(name = "playerId", index = true)
     public long playerId;
 
     @ColumnInfo(name = "score")

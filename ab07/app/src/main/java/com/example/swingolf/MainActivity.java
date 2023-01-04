@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppDatabase database = Room.databaseBuilder(this, AppDatabase.class, "swingolf_database2.db").allowMainThreadQueries().build();
-
+        AppDatabase database = Room.databaseBuilder(this, AppDatabase.class, "swingolf_database2.db").fallbackToDestructiveMigration().allowMainThreadQueries().build();
 
         TextView playerName = findViewById(R.id.addPlayerTextView);
         Button playerAdd = (Button) findViewById(R.id.addPlayer);
@@ -77,9 +77,13 @@ public class MainActivity extends AppCompatActivity {
         goToField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, match_attribute_selector.class);
+                intent.putExtra("key", "awdawd");
+                startActivity(intent);
             }
         });
+
+        database.close();
     }
 
     @SuppressLint("SetTextI18n")

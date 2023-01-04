@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "player")
 public class player {
-    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     public long id;
 
     @ColumnInfo(name = "name")

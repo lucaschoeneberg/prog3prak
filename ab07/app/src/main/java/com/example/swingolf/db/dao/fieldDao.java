@@ -11,6 +11,7 @@ import com.example.swingolf.db.entity.field;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 @Dao
 public interface fieldDao {
@@ -24,7 +25,7 @@ public interface fieldDao {
     void delete(field field);
 
     @Query("SELECT * FROM field")
-    ArrayList<field> getAllFields();
+    List<field> getAllFields();
 
     @Query("SELECT * FROM field JOIN 'match' ON field.id = 'match.fieldId' WHERE 'match.id' = :matchId LIMIT 1")
     field getFieldByMatch(long matchId);

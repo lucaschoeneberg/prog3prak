@@ -13,12 +13,12 @@ import androidx.room.PrimaryKey;
                 childColumns = "filedId",
                 onDelete = CASCADE))
 public class match {
-    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     public long id;
 
-    @ColumnInfo(name = "filedId")
-    public final long idField;
+    @ColumnInfo(name = "filedId", index = true)
+    public long idField;
 
     @ColumnInfo(name = "name")
     public String name;

@@ -25,6 +25,6 @@ public interface matchDao {
     @Query("SELECT * FROM `match`")
     List<match> getAllMatches();
 
-    @Query("SELECT * FROM `match` WHERE id=(:id)")
-    List<match> getMatchById(int id);
+    @Query("SELECT * FROM `match` WHERE id=:id LIMIT 1")
+    match getMatchById(int id);
 }
