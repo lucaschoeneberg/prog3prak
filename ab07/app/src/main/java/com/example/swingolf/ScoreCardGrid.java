@@ -3,6 +3,7 @@ package com.example.swingolf;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import java.util.List;
 
 public class ScoreCardGrid extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +76,7 @@ public class ScoreCardGrid extends AppCompatActivity {
 
                 if (i > 0) {
                     TextView textView = new TextView(this);
-                    textView.setText("Hole " + i + 1);
+                    textView.setText("Hole " + i);
                     textView.setTextColor(Color.parseColor("#FFFFFF"));
                     row.addView(textView);
 
@@ -86,7 +88,7 @@ public class ScoreCardGrid extends AppCompatActivity {
 
                         EditText editText = new EditText(this);
                         editText.setEnabled(true);
-                        editText.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                         editText.setId(j);
                         editText.setTextColor(Color.parseColor("#FFFFFF"));
                         editText.setTransformationMethod(null);
